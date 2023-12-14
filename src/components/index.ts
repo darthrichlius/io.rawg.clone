@@ -1,2 +1,4 @@
-export { default as NavBar } from "./NavBar";
-export { default as ColorModeSwitch } from "./ColorModeSwitch";
+export { default as NavBar } from "./_layout/NavBar";
+export { default as ColorModeSwitch } from "./_layout/ColorModeSwitch";
+
+export { default as GameGrid } from "./GameGrid";
