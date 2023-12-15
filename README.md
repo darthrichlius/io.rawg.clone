@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# GameHub - Clone of Rawg.io
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project aims to create a web application clone similar to Rawg.io, named "GameHub".
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Context (Why Start This Project?)
 
-## Expanding the ESLint configuration
+- This project is part of my personal portfolio aimed at showcasing a collection of "Proof of Concept" projects.
+- Each portfolio project focuses on enhancing my core skills, experimenting with new concepts or technologies, and providing boilerplate templates for future applications.
+- Prioritizing clean architecture and clean code is pivotal to me.
+- Engaging in POC projects allows me to test various approaches before implementing them into publicly releasable projects.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- As a senior Software Engineer and Product Manager, versatility in handling diverse project types is crucial.
+- To prepare for any challenge, I consistently train and hone my skills.
 
-- Configure the top-level `parserOptions` property like this:
+### Purpose (Why This Project and Its Significance)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+The primary objective remains to construct a **GameHub** platform.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### Technical Objectives
+
+- I opted to select this particular project to experiment with building a complex, dynamic, and interactive web application using React without utilizing a framework like Next.js.
+- This endeavor serves to deepen my understanding and awareness of working on such intricate projects.
+
+#### Project Objectives
+
+- It's no secret that I have a profound passion for video games.
+- They have significantly influenced my youth, fostering escapism and nurturing my imagination from childhood.
+- Engaging in projects within this realm offers intrinsic motivation, driving me forward.
+
+#### Product Objectives
+
+- I thrive on crafting products that potentially hold value for specific user segments.
+- Presently a POC, this project could potentially evolve into a larger-scale endeavor in the future.
