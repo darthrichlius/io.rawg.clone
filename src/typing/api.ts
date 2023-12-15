@@ -86,7 +86,7 @@ export interface ApiGenre {
 
 // ###################################################
 
-export interface ApiDefaultResponse<T extends ApiGame | ApiGenre> {
+export interface ApiDefaultResponse<T> {
   count: number;
   next?: string;
   previous?: string;

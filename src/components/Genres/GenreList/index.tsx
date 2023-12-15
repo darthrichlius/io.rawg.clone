@@ -1,6 +1,5 @@
 import useGenres from "@/hooks/data/useGenres";
 import { Text } from "@chakra-ui/react";
-import React from "react";
 
 const GenreList = () => {
   const { genres, loading, errors } = useGenres();
