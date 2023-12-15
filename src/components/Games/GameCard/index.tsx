@@ -10,17 +10,12 @@ interface Props {
 }
 
 const GameCard = ({ game }: Props) => {
-  const croppedImage = ApiImage.getCroppedGameImageUrl(
-    game.background_image,
-    600,
-    400
-  );
+  const croppedImage = ApiImage.getCroppedGameImageUrl(game.background_image);
   return (
     <Card
       borderRadius={UI_CONFIG.gameCard.borderRadius}
       overflow={"hidden"}
-      width={UI_CONFIG.gameCard.sizes.lg.width}
-      height={UI_CONFIG.gameCard.sizes.lg.height}
+      maxWidth={UI_CONFIG.gameCard.sizes.lg.maxWidth}
     >
       <Image src={croppedImage} />
       <CardBody>

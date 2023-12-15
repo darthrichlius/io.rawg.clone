@@ -3,8 +3,8 @@ export const UI_CONFIG = {
     borderRadius: 10,
     sizes: {
       lg: {
-        width: "293px",
-        height: "317px",
+        maxWidth: 400,
+        maxHeight: "317px",
       },
     },
   },

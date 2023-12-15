@@ -7,11 +7,14 @@
  * @param { string} url The URL of the original version of the image
  * @return { string} url The URL representing the cropped version of the image
  */
-const getCroppedGameImageUrl = (
-  url: string,
-  width: number,
-  height: number
-): string | undefined => {
+const getCroppedGameImageUrl = (url: string): string | undefined => {
+  /**
+   * It seems only these values work
+   * Therefore, no need to put "height" and "width" on parameters
+   * More investigation would be necessary to know if there are other values that work
+   */
+  const width: number = 600;
+  const height: number = 400;
   const identifier = "/media/games";
 
   // The goal is to make sure we have the right identifier (/media) inside the URL

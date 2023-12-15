@@ -4,9 +4,8 @@ import { UI_CONFIG } from "@/config/ui";
 const GamecardSkeleton = () => {
   return (
     <Card
-      width={UI_CONFIG.gameCard.sizes.lg.width}
-      height={UI_CONFIG.gameCard.sizes.lg.height}
-      borderRadius={UI_CONFIG.gameCard.borderRadius}
+      maxWidth={UI_CONFIG.gameCard.sizes.lg.maxWidth}
+      maxHeight={UI_CONFIG.gameCard.sizes.lg.maxHeight}
       overflow={"hidden"}
     >
       <Skeleton height={"195px"} />

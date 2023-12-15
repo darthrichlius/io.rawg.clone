@@ -1,12 +1,26 @@
 import useGenres from "@/hooks/data/useGenres";
-import { Text } from "@chakra-ui/react";
+import { ApiImage } from "@/services";
+import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
 
 const GenreList = () => {
   const { genres, loading, errors } = useGenres();
+
   return (
-    <div>
-      <ul>{genres && genres.map((genre) => <Text>{genre.name}</Text>)}</ul>
-    </div>
+    <List>
+      {genres &&
+        genres.map((genre) => (
+          <ListItem paddingY={"5px"}>
+            <HStack>
+              <Image
+                boxSize={"32px"}
+                borderRadius={8}
+                src={ApiImage.getCroppedGameImageUrl(genre.image_background)}
+              />
+              <Text fontSize={"lg"}>{genre.name}</Text>
+            </HStack>
+          </ListItem>
+        ))}
+    </List>
   );
 };
 
