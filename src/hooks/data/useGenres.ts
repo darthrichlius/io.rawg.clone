@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { CanceledError } from "axios";
 import { ApiClient } from "@/services";
-import { ApiGame, ApiDefaultResponse } from "@/typing/api";
+import { ApiGenre, ApiDefaultResponse } from "@/typing/api";
 
 /**
- * Fetches a list of games from the API endpoint.
- * @returns {ApiGame[]} games - List of games fetched from the API.
+ * Fetches a list of genres from the API endpoint.
+ * @returns {ApiGenre[]} genres - List of genres fetched from the API.
  * @returns {string} error - Error message resulting from the API operation, if any.
  */
-const useGames = () => {
-  const [games, setGames] = useState<ApiGame[]>([]);
+const useGenres = () => {
+  const [genres, setGenres] = useState<ApiGenre[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -24,11 +24,11 @@ const useGames = () => {
     /**
      * The signal option in the "fetch" or "axios" request allows to associate an AbortController's signal with the request.
      */
-    ApiClient.get<ApiDefaultResponse<ApiGame>>("/games", {
+    ApiClient.get<ApiDefaultResponse<ApiGenre>>("/genres", {
       signal: controller.signal,
     })
       .then((res) => {
-        setGames(res.data.results);
+        setGenres(res.data.results);
         setLoading(false);
       })
       .catch((err) => {
@@ -53,10 +53,10 @@ const useGames = () => {
   }, []);
 
   return {
-    games,
+    genres,
     loading,
     error,
   };
 };
 
-export default useGames;
+export default useGenres;
