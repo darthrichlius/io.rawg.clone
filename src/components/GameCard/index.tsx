@@ -1,7 +1,7 @@
 import { map as _map } from "lodash";
-import { GamePlatformList } from "@/components";
+import { GameCriticScore, GamePlatformList } from "@/components";
 import { ApiGame } from "@/typing/api";
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 
 interface Props {
   game: ApiGame;
@@ -13,11 +13,14 @@ const GameCard = ({ game }: Props) => {
       <Image src={game.background_image} />
       <CardBody>
         <Heading fontSize={"2xl"}>{game.name}</Heading>
-        {game && game.parent_platforms && (
-          <GamePlatformList
-            platforms={_map(game.parent_platforms, "platform")}
-          />
-        )}
+        <HStack justifyContent={"space-between"}>
+          {game.parent_platforms && (
+            <GamePlatformList
+              platforms={_map(game.parent_platforms, "platform")}
+            />
+          )}
+          <GameCriticScore score={game.metacritic} />
+        </HStack>
       </CardBody>
     </Card>
   );
