@@ -1,17 +1,9 @@
-import { ApiClient } from "@/services";
-import { ApiDefaultResponse, ApiGame } from "@/typing/api";
+import { useGames } from "@/hooks";
 import { Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 
 const GameGrid = () => {
-  const [games, setGames] = useState<ApiGame[]>([]);
-  const [error, setError] = useState("");
+  const { games, error } = useGames();
 
-  useEffect(() => {
-    ApiClient.get<ApiDefaultResponse>("/games")
-      .then((res) => setGames(res.data.results))
-      .catch((err) => setError(err.message));
-  });
   return (
     <>
       {games && (
