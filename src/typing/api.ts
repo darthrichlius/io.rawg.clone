@@ -1,3 +1,9 @@
+export interface ApiGamePlatform {
+  id: number;
+  slug: ApiGamePlatformIcon;
+  name: string;
+}
+
 export interface ApiGame {
   id: number;
   slug: string;
@@ -44,13 +50,10 @@ export interface ApiGame {
   parents_count: number;
   additions_count: number;
   game_series_count: number;
+  parent_platforms: { platform: ApiGamePlatform }[];
   platforms: [
     {
-      platform: {
-        id: 0;
-        slug: string;
-        name: string;
-      };
+      platform: ApiGamePlatform;
       released_at: string;
       requirements: {
         minimum: string;
@@ -58,6 +61,18 @@ export interface ApiGame {
       };
     }
   ];
+}
+
+export enum ApiGamePlatformIcon {
+  android = "android",
+  ios = "ios",
+  linux = "linux",
+  mac = "mac",
+  nintendo = "nintendo",
+  playstation = "playstation",
+  pc = "pc",
+  web = "web",
+  xbox = "xbox",
 }
 
 export interface ApiDefaultResponse {
