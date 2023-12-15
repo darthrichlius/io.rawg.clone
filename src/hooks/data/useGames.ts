@@ -11,6 +11,7 @@ import { ApiGame, ApiDefaultResponse } from "@/typing/api";
 const useGames = () => {
   const [games, setGames] = useState<ApiGame[]>([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     /**
@@ -18,15 +19,27 @@ const useGames = () => {
      */
     const controller = new AbortController();
 
+    setLoading(true);
+
     /**
      * The signal option in the "fetch" or "axios" request allows to associate an AbortController's signal with the request.
      */
     ApiClient.get<ApiDefaultResponse>("/games", { signal: controller.signal })
-      .then((res) => setGames(res.data.results))
+      .then((res) => {
+        setGames(res.data.results);
+        setLoading(false);
+      })
       .catch((err) => {
         if (err instanceof CanceledError) return;
         setError(err.message);
+        setLoading(false);
       });
+    /*
+      .finally(() => {
+        // Might not work in strict mode
+        setLoading(false);
+      })
+      //*/
 
     /**
      * In this case, the cleanup function is aimed at avoiding unnecessary operations
@@ -39,6 +52,7 @@ const useGames = () => {
 
   return {
     games,
+    loading,
     error,
   };
 };

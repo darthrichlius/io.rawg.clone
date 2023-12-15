@@ -1,8 +1,9 @@
+import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 import { map as _map } from "lodash";
 import { ApiImage } from "@/services";
 import { GameCriticScore, GamePlatformList } from "@/components";
 import { ApiGame } from "@/typing/api";
-import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
+import { UI_CONFIG } from "@/config/ui";
 
 interface Props {
   game: ApiGame;
@@ -15,7 +16,12 @@ const GameCard = ({ game }: Props) => {
     400
   );
   return (
-    <Card borderRadius={10} overflow={"hidden"}>
+    <Card
+      borderRadius={UI_CONFIG.gameCard.borderRadius}
+      overflow={"hidden"}
+      width={UI_CONFIG.gameCard.sizes.lg.width}
+      height={UI_CONFIG.gameCard.sizes.lg.height}
+    >
       <Image src={croppedImage} />
       <CardBody>
         <Heading fontSize={"2xl"}>{game.name}</Heading>
