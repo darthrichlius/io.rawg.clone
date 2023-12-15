@@ -1,4 +1,5 @@
 import { map as _map } from "lodash";
+import { ApiImage } from "@/services";
 import { GameCriticScore, GamePlatformList } from "@/components";
 import { ApiGame } from "@/typing/api";
 import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
@@ -8,9 +9,14 @@ interface Props {
 }
 
 const GameCard = ({ game }: Props) => {
+  const croppedImage = ApiImage.getCroppedGameImageUrl(
+    game.background_image,
+    600,
+    400
+  );
   return (
     <Card borderRadius={10} overflow={"hidden"}>
-      <Image src={game.background_image} />
+      <Image src={croppedImage} />
       <CardBody>
         <Heading fontSize={"2xl"}>{game.name}</Heading>
         <HStack justifyContent={"space-between"}>
