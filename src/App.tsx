@@ -25,7 +25,14 @@ function App() {
       }}
     >
       <GridItem area="nav" bg="transparent">
-        <NavBar />
+        <NavBar
+          onSearch={(searchInput) =>
+            setGameQuery({
+              ...gameQuery,
+              search: searchInput,
+            })
+          }
+        />
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" bg="transparent" paddingX={5}>
@@ -69,7 +76,7 @@ function App() {
             selectedGameSort={gameQuery.ordering}
           />
         </HStack>
-        <GameGrid filters={gameQuery.filters} ordering={gameQuery.ordering} />
+        <GameGrid filters={gameQuery.filters} ordering={gameQuery.ordering} search={gameQuery.search} />
       </GridItem>
     </Grid>
   );

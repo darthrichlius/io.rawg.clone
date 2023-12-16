@@ -89,6 +89,7 @@ export interface ApiGameGenre {
 export interface ApiGameQuery {
   filters?: ApiGameFiltersQuery;
   ordering?: ApiGameGameSort;
+  search?: string;
 }
 
 export interface ApiGameFiltersQuery {

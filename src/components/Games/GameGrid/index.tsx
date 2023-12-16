@@ -5,7 +5,7 @@ import { ArrayUtils } from "@/utils";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import { compact as _compact } from "lodash";
 
-const GameGrid = ({ filters, ordering }: ApiGameQuery) => {
+const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
   const skeletons = ArrayUtils.newRandomArray(6);
   const { games, loading, error } = useGames({
     filters: {
@@ -13,6 +13,7 @@ const GameGrid = ({ filters, ordering }: ApiGameQuery) => {
       platforms: _compact(filters?.platforms ?? []),
     },
     ordering,
+    search,
   });
 
   if (error) null;

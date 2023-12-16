@@ -3,7 +3,11 @@ import logo from "@assets/logo.webp";
 import ConfigApp from "@config/app";
 import { ColorModeSwitch, SearchInput } from "@/components";
 
-const NavBar = () => {
+interface Props {
+  onSearch: (searchInput: string) => void;
+}
+
+const NavBar = ({ onSearch }: Props) => {
   return (
     <Grid
       templateColumns={{
@@ -17,7 +21,7 @@ const NavBar = () => {
         <Text>{ConfigApp.app_name}</Text>
       </HStack>
       <HStack justifyContent={"space-between"} paddingX={10}>
-        <SearchInput />
+        <SearchInput onSearch={onSearch} />
         <ColorModeSwitch />
       </HStack>
     </Grid>

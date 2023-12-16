@@ -23,6 +23,7 @@ interface Props {
     platforms?: ApiGamePlatform[] | [];
   };
   ordering?: ApiGameGameSort;
+  search?: string;
 }
 
 /**
@@ -30,11 +31,17 @@ interface Props {
  * @returns {ApiGame[]} games - List of games fetched from the API.
  * @returns {string} error - Error message resulting from the API operation, if any.
  */
-const useGames = ({ filters = undefined, ordering = undefined }: Props) => {
+const useGames = ({
+  filters = undefined,
+  ordering = undefined,
+  search = undefined,
+}: Props) => {
   const { data: games, ...rest } = useData<ApiGame>(
     ApiConfig.endpoints.games.getAll,
-    filters || ordering ? buildParams({ filters, ordering }) : undefined,
-    filters || ordering ? buildDeps({ filters, ordering }) : ""
+    filters || ordering
+      ? buildParams({ filters, ordering, search })
+      : undefined,
+    filters || ordering ? buildDeps({ filters, ordering, search }) : ""
   );
 
   return { games, ...rest };
@@ -46,7 +53,12 @@ const useGames = ({ filters = undefined, ordering = undefined }: Props) => {
  * @returns
  */
 const buildParams = (props: Props): AxiosRequestConfig => {
-  const params: { genres?: string; platforms?: string; ordering?: string } = {};
+  const params: {
+    genres?: string;
+    platforms?: string;
+    ordering?: string;
+    search?: string;
+  } = {};
 
   if (props.filters?.genres && props.filters?.genres.length) {
     params["genres"] = _compact(props.filters?.genres)
@@ -61,6 +73,10 @@ const buildParams = (props: Props): AxiosRequestConfig => {
 
   if (props.ordering) {
     params["ordering"] = props.ordering.slug;
+  }
+
+  if (props.search) {
+    params["search"] = props.search;
   }
 
   return {

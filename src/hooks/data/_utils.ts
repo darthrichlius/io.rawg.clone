@@ -10,7 +10,7 @@ import { ApiGameQuery } from "@/typing/api";
  * @param filters
  * @returns
  */
-export const buildDeps = ({ filters, ordering }: ApiGameQuery): string => {
+export const buildDeps = ({ filters, ordering, search }: ApiGameQuery): string => {
   let checksum = filters
     ? Object.values(filters)
         .flat()
@@ -18,6 +18,7 @@ export const buildDeps = ({ filters, ordering }: ApiGameQuery): string => {
         .join(",")
     : "";
   checksum += ordering?.slug ?? "";
+  checksum += search ?? "";
 
   return checksum;
 };
