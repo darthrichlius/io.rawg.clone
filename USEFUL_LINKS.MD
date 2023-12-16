@@ -1,3 +1,8 @@
+## CONVENTIONS
+
+- [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
+- [Conventional Changelog Commit Lint](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional)
+
 ## API
 
 ### RAWG.IO API
