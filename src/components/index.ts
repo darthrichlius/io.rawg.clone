@@ -17,3 +17,7 @@ export { default as GamePlatformList } from "./Games/GamePlatformList";
 // # RESOURCES/GENRES
 
 export { default as GenreList } from "./Genres/GenreList";
+
+// # RESOURCES/PLAFORMS
+
+export { default as PlatformSelector } from "./Platforms/PlatformSelector";

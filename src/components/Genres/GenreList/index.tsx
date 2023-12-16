@@ -1,4 +1,4 @@
-import useGenres from "@/hooks/data/useGenres";
+import { useGenres } from "@/hooks/";
 import { ApiImage } from "@/services";
 import { ApiGenre } from "@/typing/api";
 import {

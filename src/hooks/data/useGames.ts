@@ -1,12 +1,15 @@
-import { ApiGame, ApiGenre } from "@/typing/api";
-import useData from "./useData";
-import ApiConfig from "@/config/api";
 import { AxiosRequestConfig } from "axios";
+import { compact as _compact } from "lodash";
+import ApiConfig from "@/config/api";
+import { ApiGame, ApiGamePlatform, ApiGenre } from "@/typing/api";
+import { buildDeps } from "./_utils";
+import useData from "./useData";
 
 interface Props {
   filters?: {
     // As of this version, if we have filters, we have "genres"
-    genres: ApiGenre[];
+    genres?: ApiGenre[] | [];
+    platforms?: ApiGamePlatform[] | [];
   };
 }
 
@@ -25,26 +28,28 @@ const useGames = ({ filters = undefined }: Props) => {
   return { games, ...rest };
 };
 
-const buildParams = (filters: Props["filters"]): AxiosRequestConfig => {
-  return {
-    params: {
-      genres: filters!.genres.map((genre) => genre.id).join(","),
-    },
-  };
-};
-
 /**
- * Create a form of checksum to indicate changes to `useEffect()`.
- *
- * The goal is to construct a string that will signify any change to `useEffect()`.
- * It is crucial to pass stable values or primitive types as they are passed as values and not as pointers.
- * Passing a pointer to `useEffect()` can have severe effects as its value can change and trigger a loop.
- *
- * @param filters
- * @returns
+ * Build a AxiosRequestConfig with the different filers
+ * @param filters 
+ * @returns 
  */
-const buildDeps = (filters: Props["filters"]): string => {
-  return [filters!.genres.map((genre) => genre.id).join(",")].join(";");
+const buildParams = (filters: Props["filters"]): AxiosRequestConfig => {
+  const params: { genres?: string; platforms?: string } = {};
+
+  if (filters!.genres && filters!.genres.length) {
+    params["genres"] = _compact(filters!.genres)
+      .map((genre) => genre.id)
+      .join(",");
+  }
+  if (filters!.platforms && filters!.platforms.length) {
+    params["platforms"] = _compact(filters!.platforms)
+      .map((platform) => platform.id)
+      .join(",");
+  }
+
+  return {
+    params: params,
+  };
 };
 
 export default useGames;

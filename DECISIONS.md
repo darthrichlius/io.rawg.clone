@@ -8,6 +8,16 @@
 - **ViteJS incorporates built-in TypeScript integration**, aiding in identifying and addressing potential bugs for a more robust codebase.
 - **This project primarily serves as a proof of concept (POC) rather than a user-oriented application**. Therefore, opting for a less complex approach without technologies like NextJS is preferable.
 
+### Why so much configuration?
+
+Employing an extended configuration approach:
+
+1. **Simplifies Complexity:** Reduces intricacies within the setup.
+2. **Facilitates Ease of Changes:** Makes updates simpler.
+3. **Enhances Code Generality:** Contributes to less intricacies and dependencies within Components.
+4. **Ideal for Testing:** Enables testing of specific scenarios by modifying or creating distinct config files.
+5. **Deployments Benefit:** Supports different config files tailored to various environments, offering adaptability during deployment.
+
 ## OPERATIONAL ARCHITECTURE
 
 ### What's the rationale behind creating `useData()`?
@@ -29,4 +39,3 @@ This choice is based on 3 main factors:
 - The desire to **discover** a new UI Library
 - Chakra UI Design System fits better with the **original application design** we are cloning
 - The **challenge** of creating an application with a new, not yet mastered stack to improve skill flexibility and adaptability
-

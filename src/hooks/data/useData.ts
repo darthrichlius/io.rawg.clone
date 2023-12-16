@@ -1,22 +1,26 @@
 import { useState, useEffect } from "react";
-import { AxiosRequestConfig, CanceledError } from "axios";
+import { AxiosRequestConfig, AxiosError, CanceledError } from "axios";
 import { ApiDefaultResponse } from "@/typing/api";
 import { ApiClient } from "@/services";
 
 /**
  * Fetches a list of data from the API endpoint.
  * @returns {T[]} data - List of data fetched from the API.
- * @returns {string} loading - Loading state
- * @returns {string} error - Error message resulting from the API operation, if any.
+ * @returns {boolean} loading - Loading state
+ * @returns {AxiosError | null} error - Error message resulting from the API operation, if any.
  */
 const useData = <T>(
   endpoint: string,
   requestConfig?: AxiosRequestConfig,
   deps?: string
-) => {
+): {
+  data: T[];
+  loading: boolean;
+  error: AxiosError | null;
+} => {
   const [data, setData] = useState<T[]>([]);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<AxiosError | null>(null);
 
   useEffect(
     () => {
@@ -38,9 +42,9 @@ const useData = <T>(
           setData(res.data.results);
           setLoading(false);
         })
-        .catch((err) => {
+        .catch((err: AxiosError) => {
           if (err instanceof CanceledError) return;
-          setError(err.message);
+          setError(err);
           setLoading(false);
         });
       /*

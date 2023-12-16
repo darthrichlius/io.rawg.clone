@@ -1,10 +1,13 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
-import { NavBar, GameGrid, GenreList } from "@/components";
+import { NavBar, GameGrid, GenreList, PlatformSelector } from "@/components";
 import { useState } from "react";
-import { ApiGenre } from "@/typing/api";
+import { ApiGamePlatform, ApiGenre } from "@/typing/api";
 
 function App() {
   const [selectedGenre, setSlectedGenre] = useState<ApiGenre | null>(null);
+  const [selectedPlatform, setSlectedPlatform] =
+    useState<ApiGamePlatform | null>(null);
+
   return (
     /** @see https://chakra-ui.com/docs/styled-system/responsive-styles */
     <Grid
@@ -29,7 +32,14 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main" bg="transparent">
-        <GameGrid selectedGenre={selectedGenre} />
+        <PlatformSelector
+          selectedPlatform={selectedPlatform}
+          onSelectedPlatform={(platform) => setSlectedPlatform(platform)}
+        />
+        <GameGrid
+          selectedGenre={selectedGenre}
+          selectedPlatform={selectedPlatform}
+        />
       </GridItem>
     </Grid>
   );
