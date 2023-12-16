@@ -2,9 +2,16 @@ import { useGames } from "@/hooks";
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import { GameCard, GameCardSkeleton } from "@/components";
 import { ArrayUtils } from "@/utils";
+import { ApiGenre } from "@/typing/api";
 
-const GameGrid = () => {
-  const { games, loading, error } = useGames();
+interface Props {
+  selectedGenre: ApiGenre | null;
+}
+
+const GameGrid = ({ selectedGenre }: Props) => {
+  const filters = selectedGenre ? { genres: [selectedGenre] } : undefined;
+
+  const { games, loading, error } = useGames({ filters: filters });
   const skeletons = ArrayUtils.newRandomArray(6);
 
   return (

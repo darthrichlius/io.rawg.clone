@@ -1,8 +1,20 @@
 import useGenres from "@/hooks/data/useGenres";
 import { ApiImage } from "@/services";
-import { HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
+import { ApiGenre } from "@/typing/api";
+import {
+  HStack,
+  Image,
+  List,
+  ListItem,
+  Spinner,
+  Button,
+} from "@chakra-ui/react";
 
-const GenreList = () => {
+interface Props {
+  onSelectedGenre: (genre: ApiGenre) => void;
+}
+
+const GenreList = ({ onSelectedGenre }: Props) => {
   const { genres, loading, error } = useGenres();
 
   if (loading) return <Spinner />;
@@ -17,14 +29,20 @@ const GenreList = () => {
     <List>
       {genres &&
         genres.map((genre) => (
-          <ListItem paddingY={"5px"}>
+          <ListItem key={genre.id} paddingY={"5px"}>
             <HStack>
               <Image
                 boxSize={"32px"}
                 borderRadius={8}
                 src={ApiImage.getCroppedGameImageUrl(genre.image_background)}
               />
-              <Text fontSize={"lg"}>{genre.name}</Text>
+              <Button
+                onClick={() => onSelectedGenre(genre)}
+                fontSize={"lg"}
+                variant={"link"}
+              >
+                {genre.name}
+              </Button>
             </HStack>
           </ListItem>
         ))}
