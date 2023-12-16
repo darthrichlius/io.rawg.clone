@@ -1,10 +1,4 @@
-import { ApiGamePlatform, ApiGameGenre } from "@/typing/api";
-
-/**
- * We could have used a 'type' declaration,
- * ... but we preferred an interface to maintain coherence with the existing codebase
- */
-interface Props extends Record<string, ApiGameGenre[] | ApiGamePlatform[]> {}
+import { ApiGameQuery } from "@/typing/api";
 
 /**
  * Create a form of checksum to indicate changes to `useEffect()`.
@@ -16,9 +10,14 @@ interface Props extends Record<string, ApiGameGenre[] | ApiGamePlatform[]> {}
  * @param filters
  * @returns
  */
-export const buildDeps = (filters: Props): string => {
-  return Object.values(filters)
-    .flat()
-    .map((filter) => filter.id)
-    .join(",");
+export const buildDeps = ({ filters, ordering }: ApiGameQuery): string => {
+  let checksum = filters
+    ? Object.values(filters)
+        .flat()
+        .map((filter) => filter.id)
+        .join(",")
+    : "";
+  checksum += ordering?.slug ?? "";
+
+  return checksum;
 };

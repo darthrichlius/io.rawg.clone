@@ -86,10 +86,37 @@ export interface ApiGameGenre {
 
 // ###################################################
 
+export interface ApiGameQuery {
+  filters?: ApiGameFiltersQuery;
+  ordering?: ApiGameGameSort;
+}
+
 export interface ApiGameFiltersQuery {
   genres?: ApiGameGenre[];
   platforms?: ApiGamePlatform[];
 }
+
+export interface ApiGameGameSort {
+  name: string;
+  slug: ApiGameGameSortSlug;
+}
+
+export type ApiGameGameSortSlug =
+  | "" // Needed for Releveance case that is default one. Might be a better solution .. but ...
+  | "name"
+  | "-name"
+  | "released"
+  | "-released"
+  | "added"
+  | "-added"
+  | "created"
+  | "-created"
+  | "updated"
+  | "-updated"
+  | "rating"
+  | "-rating"
+  | "metacritic"
+  | "-metacritic";
 
 // ###################################################
 

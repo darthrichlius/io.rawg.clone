@@ -1,16 +1,28 @@
 import { AxiosRequestConfig } from "axios";
 import { compact as _compact } from "lodash";
 import ApiConfig from "@/config/api";
-import { ApiGame, ApiGamePlatform, ApiGameGenre } from "@/typing/api";
+import {
+  ApiGame,
+  ApiGamePlatform,
+  ApiGameGenre,
+  ApiGameGameSort,
+} from "@/typing/api";
 import { buildDeps } from "./_utils";
 import useData from "./useData";
 
+/**
+ * ! IMPORTANT
+ * @todo This should be refactored to use ApiGameQuery
+ * I acknowledge it will have an impact as it means refactor the code to make sure to always have an array | undefined
+ * Doesn't seen incredible but need to be done carefully
+ */
 interface Props {
   filters?: {
     // As of this version, if we have filters, we have "genres"
     genres?: ApiGameGenre[] | [];
     platforms?: ApiGamePlatform[] | [];
   };
+  ordering?: ApiGameGameSort;
 }
 
 /**
@@ -18,11 +30,11 @@ interface Props {
  * @returns {ApiGame[]} games - List of games fetched from the API.
  * @returns {string} error - Error message resulting from the API operation, if any.
  */
-const useGames = ({ filters = undefined }: Props) => {
+const useGames = ({ filters = undefined, ordering = undefined }: Props) => {
   const { data: games, ...rest } = useData<ApiGame>(
     ApiConfig.endpoints.games.getAll,
-    filters ? buildParams(filters) : undefined,
-    filters ? buildDeps(filters) : ""
+    filters || ordering ? buildParams({ filters, ordering }) : undefined,
+    filters || ordering ? buildDeps({ filters, ordering }) : ""
   );
 
   return { games, ...rest };
@@ -33,18 +45,22 @@ const useGames = ({ filters = undefined }: Props) => {
  * @param filters
  * @returns
  */
-const buildParams = (filters: Props["filters"]): AxiosRequestConfig => {
-  const params: { genres?: string; platforms?: string } = {};
+const buildParams = (props: Props): AxiosRequestConfig => {
+  const params: { genres?: string; platforms?: string; ordering?: string } = {};
 
-  if (filters!.genres && filters!.genres.length) {
-    params["genres"] = _compact(filters!.genres)
+  if (props.filters?.genres && props.filters?.genres.length) {
+    params["genres"] = _compact(props.filters?.genres)
       .map((genre) => genre.id)
       .join(",");
   }
-  if (filters!.platforms && filters!.platforms.length) {
-    params["platforms"] = _compact(filters!.platforms)
+  if (props.filters?.platforms && props.filters?.platforms.length) {
+    params["platforms"] = _compact(props.filters?.platforms)
       .map((platform) => platform.id)
       .join(",");
+  }
+
+  if (props.ordering) {
+    params["ordering"] = props.ordering.slug;
   }
 
   return {

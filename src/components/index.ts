@@ -14,6 +14,8 @@ export { default as GamePlatformIcon } from "./Games/GamePlatformIcon";
 
 export { default as GamePlatformList } from "./Games/GamePlatformList";
 
+export { default as GameSortSelector } from "./Games/GameSortSelector";
+
 // # RESOURCES/GENRES
 
 export { default as GenreList } from "./Genres/GenreList";

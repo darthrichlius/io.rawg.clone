@@ -1,22 +1,19 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
-import { compact as _compact } from "lodash";
 import { GameCard, GameCardSkeleton } from "@/components";
 import { useGames } from "@/hooks";
-import { ApiGameFiltersQuery } from "@/typing/api";
+import { ApiGameQuery } from "@/typing/api";
 import { ArrayUtils } from "@/utils";
+import { SimpleGrid, Text } from "@chakra-ui/react";
+import { compact as _compact } from "lodash";
 
-interface Props {
-  filters?: ApiGameFiltersQuery;
-}
-
-const GameGrid = ({ filters }: Props) => {
-  const sanitizedFilters = {
-    genres: _compact(filters?.genres ?? []),
-    platforms: _compact(filters?.platforms ?? []),
-  };
-
-  const { games, loading, error } = useGames({ filters: sanitizedFilters });
+const GameGrid = ({ filters, ordering }: ApiGameQuery) => {
   const skeletons = ArrayUtils.newRandomArray(6);
+  const { games, loading, error } = useGames({
+    filters: {
+      genres: _compact(filters?.genres ?? []),
+      platforms: _compact(filters?.platforms ?? []),
+    },
+    ordering,
+  });
 
   if (error) null;
 
