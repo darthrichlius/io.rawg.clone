@@ -1,10 +1,10 @@
-import { ApiGamePlatform, ApiGenre } from "@/typing/api";
+import { ApiGamePlatform, ApiGameGenre } from "@/typing/api";
 
 /**
  * We could have used a 'type' declaration,
  * ... but we preferred an interface to maintain coherence with the existing codebase
  */
-interface Props extends Record<string, ApiGenre[] | ApiGamePlatform[]> {}
+interface Props extends Record<string, ApiGameGenre[] | ApiGamePlatform[]> {}
 
 /**
  * Create a form of checksum to indicate changes to `useEffect()`.

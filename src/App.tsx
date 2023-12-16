@@ -1,12 +1,10 @@
+import { GameGrid, GenreList, NavBar, PlatformSelector } from "@/components";
+import { ApiGameFiltersQuery } from "@/typing/api";
 import { Grid, GridItem, Show } from "@chakra-ui/react";
-import { NavBar, GameGrid, GenreList, PlatformSelector } from "@/components";
 import { useState } from "react";
-import { ApiGamePlatform, ApiGenre } from "@/typing/api";
 
 function App() {
-  const [selectedGenre, setSlectedGenre] = useState<ApiGenre | null>(null);
-  const [selectedPlatform, setSlectedPlatform] =
-    useState<ApiGamePlatform | null>(null);
+  const [gameFilters, setGameFilters] = useState<ApiGameFiltersQuery>({});
 
   return (
     /** @see https://chakra-ui.com/docs/styled-system/responsive-styles */
@@ -26,20 +24,25 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" bg="transparent" paddingX={5}>
           <GenreList
-            onSelectedGenre={(genre) => setSlectedGenre(genre)}
-            selectedGenre={selectedGenre}
+            onSelectedGenre={(genre) =>
+              setGameFilters({ ...gameFilters, genres: [genre] })
+            }
+            selectedGenre={
+              gameFilters?.genres ? gameFilters.genres[0] : undefined // gameFilters?.platforms if exists is necessarely an Array
+            }
           />
         </GridItem>
       </Show>
       <GridItem area="main" bg="transparent">
         <PlatformSelector
-          selectedPlatform={selectedPlatform}
-          onSelectedPlatform={(platform) => setSlectedPlatform(platform)}
+          selectedPlatform={
+            gameFilters?.platforms ? gameFilters.platforms[0] : undefined // gameFilters?.platforms if exists is necessarely an Array
+          }
+          onSelectedPlatform={(platform) =>
+            setGameFilters({ ...gameFilters, platforms: [platform] })
+          }
         />
-        <GameGrid
-          selectedGenre={selectedGenre}
-          selectedPlatform={selectedPlatform}
-        />
+        <GameGrid filters={gameFilters} />
       </GridItem>
     </Grid>
   );

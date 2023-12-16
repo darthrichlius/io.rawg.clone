@@ -1,14 +1,14 @@
 import { AxiosRequestConfig } from "axios";
 import { compact as _compact } from "lodash";
 import ApiConfig from "@/config/api";
-import { ApiGame, ApiGamePlatform, ApiGenre } from "@/typing/api";
+import { ApiGame, ApiGamePlatform, ApiGameGenre } from "@/typing/api";
 import { buildDeps } from "./_utils";
 import useData from "./useData";
 
 interface Props {
   filters?: {
     // As of this version, if we have filters, we have "genres"
-    genres?: ApiGenre[] | [];
+    genres?: ApiGameGenre[] | [];
     platforms?: ApiGamePlatform[] | [];
   };
 }
@@ -30,8 +30,8 @@ const useGames = ({ filters = undefined }: Props) => {
 
 /**
  * Build a AxiosRequestConfig with the different filers
- * @param filters 
- * @returns 
+ * @param filters
+ * @returns
  */
 const buildParams = (filters: Props["filters"]): AxiosRequestConfig => {
   const params: { genres?: string; platforms?: string } = {};

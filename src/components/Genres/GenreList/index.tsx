@@ -1,6 +1,6 @@
 import { useGenres } from "@/hooks/";
 import { ApiImage } from "@/services";
-import { ApiGenre } from "@/typing/api";
+import { ApiGameGenre } from "@/typing/api";
 import {
   HStack,
   Image,
@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 
 interface Props {
-  onSelectedGenre: (genre: ApiGenre) => void;
-  selectedGenre: ApiGenre | null;
+  onSelectedGenre: (genre: ApiGameGenre) => void;
+  selectedGenre?: ApiGameGenre;
 }
 
 const GenreList = ({ selectedGenre, onSelectedGenre }: Props) => {

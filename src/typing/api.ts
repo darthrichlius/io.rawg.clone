@@ -75,13 +75,20 @@ export enum ApiGamePlatformIcon {
   xbox = "xbox",
 }
 
-export interface ApiGenre {
+export interface ApiGameGenre {
   id: number;
   name: string;
   slug: string;
   games_count: number;
   image_background: string;
   description: string;
+}
+
+// ###################################################
+
+export interface ApiGameFiltersQuery {
+  genres?: ApiGameGenre[];
+  platforms?: ApiGamePlatform[];
 }
 
 // ###################################################
