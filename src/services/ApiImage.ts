@@ -9,9 +9,10 @@
  */
 const getCroppedGameImageUrl = (url: string): string | undefined => {
   /**
-   * It seems only these values work
-   * Therefore, no need to put "height" and "width" on parameters
-   * More investigation would be necessary to know if there are other values that work
+   * Only these values seem to function properly.
+   * Hence, excluding "height" and "width" from parameters.
+   * Further investigation is needed to identify any additional functional values.
+   * However, it appears to be related to a backend blockage.
    */
   const width: number = 600;
   const height: number = 400;
