@@ -4,13 +4,16 @@ import { ApiImage } from "@/services";
 import { GameCriticScore, GamePlatformList } from "@/components";
 import { ApiGame } from "@/typing/api";
 import { UI_CONFIG } from "@/config/ui";
+import NoImagePlaceHolder from "@/assets/no-image-placeholder.webp";
 
 interface Props {
   game: ApiGame;
 }
 
 const GameCard = ({ game }: Props) => {
-  const croppedImage = ApiImage.getCroppedGameImageUrl(game.background_image);
+  const croppedImage = game.background_image
+    ? ApiImage.getCroppedGameImageUrl(game.background_image)
+    : NoImagePlaceHolder;
   return (
     <Card
       borderRadius={UI_CONFIG.gameCard.borderRadius}
