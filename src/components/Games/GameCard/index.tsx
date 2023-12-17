@@ -21,8 +21,8 @@ const GameCard = ({ game }: Props) => {
       maxWidth={UI_CONFIG.gameCard.sizes.lg.maxWidth}
     >
       <Image src={croppedImage} />
-      <CardBody>
-        <Heading fontSize={"2xl"}>{game.name}</Heading>
+      <CardBody alignContent={"space-around"}>
+        <Heading fontSize={"xl"}>{game.name}</Heading>
         <HStack justifyContent={"space-between"}>
           {game.parent_platforms && (
             <GamePlatformList

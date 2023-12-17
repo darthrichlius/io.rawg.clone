@@ -6,7 +6,7 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import { compact as _compact } from "lodash";
 
 const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
-  const skeletons = ArrayUtils.newRandomArray(6);
+  const skeletons = ArrayUtils.newRandomArray(8);
   const { games, loading, error } = useGames({
     filters: {
       genres: _compact(filters?.genres ?? []),
@@ -25,6 +25,7 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
           sm: 1,
           md: 2,
           lg: 3,
+          xl: 4,
         }}
         marginTop={10}
         spacing={10}
