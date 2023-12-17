@@ -1,9 +1,16 @@
 import axios from "axios";
 import ApiConfig from "@/config/api";
 
-export default axios.create({
+const instance = axios.create({
   baseURL: ApiConfig.baseUrl,
-  params: {
-    key: import.meta.env.VITE_API_RAWG_IO_API_KEY,
-  },
 });
+
+instance.interceptors.request.use((config) => {
+  config.params = {
+    ...config.params,
+    key: import.meta.env.VITE_API_RAWG_IO_API_KEY,
+  };
+  return config;
+});
+
+export default instance;
