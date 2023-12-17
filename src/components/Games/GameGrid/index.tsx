@@ -1,9 +1,9 @@
+import { SimpleGrid, Text, useToast } from "@chakra-ui/react";
+import { compact as _compact } from "lodash";
 import { GameCard, GameCardSkeleton } from "@/components";
 import { useGames } from "@/hooks";
 import { ApiGameQuery } from "@/typing/api";
 import { ArrayUtils } from "@/utils";
-import { SimpleGrid, Text } from "@chakra-ui/react";
-import { compact as _compact } from "lodash";
 
 const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
   const skeletons = ArrayUtils.newRandomArray(8);
@@ -15,8 +15,18 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
     ordering,
     search,
   });
+  const toast = useToast();
 
-  if (error) null;
+  if (error) {
+    toast({
+      title: error.response?.status !== 500 ? "Error" : "Internal Error",
+      description: error.message,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
+    return null;
+  }
 
   return (
     <>
