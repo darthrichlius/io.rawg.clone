@@ -8,6 +8,7 @@ import {
   ListItem,
   Spinner,
   Button,
+  Heading,
 } from "@chakra-ui/react";
 
 interface Props {
@@ -27,28 +28,47 @@ const GenreList = ({ selectedGenre, onSelectedGenre }: Props) => {
   if (error) return;
 
   return (
-    <List>
-      {genres &&
-        genres.map((genre) => (
-          <ListItem key={genre.id} paddingY={"5px"}>
-            <HStack>
-              <Image
-                boxSize={"32px"}
-                borderRadius={8}
-                src={ApiImage.getCroppedGameImageUrl(genre.image_background)}
-              />
-              <Button
-                onClick={() => onSelectedGenre(genre)}
-                fontSize={"lg"}
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
-                variant={"link"}
-              >
-                {genre.name}
-              </Button>
-            </HStack>
-          </ListItem>
-        ))}
-    </List>
+    <>
+      <Heading fontSize={"2xl"} marginBottom={5}>
+        Genres
+      </Heading>
+      <List>
+        {genres &&
+          genres.map((genre) => (
+            <ListItem key={genre.id} paddingY={"5px"}>
+              <HStack>
+                <Button
+                  leftIcon={<GenreButtonImage genre={genre} />}
+                  paddingY={5}
+                  fontSize={"lg"}
+                  fontWeight={
+                    genre.id === selectedGenre?.id ? "bold" : "normal"
+                  }
+                  whiteSpace={"normal"}
+                  textAlign={"left"}
+                  variant={"ghost"}
+                  textDecoration={"none"}
+                  onClick={() => onSelectedGenre(genre)}
+                >
+                  {genre.name}
+                </Button>
+              </HStack>
+            </ListItem>
+          ))}
+      </List>
+    </>
+  );
+};
+
+const GenreButtonImage = ({ genre }: { genre: ApiGameGenre }) => {
+  return (
+    <Image
+      boxSize={"32px"}
+      objectFit={"cover"}
+      borderRadius={8}
+      marginRight={1}
+      src={ApiImage.getCroppedGameImageUrl(genre.image_background)}
+    />
   );
 };
 
