@@ -9,6 +9,7 @@ export { default as ColorModeSwitch } from "./_layout/ColorModeSwitch";
 export { default as GameGrid } from "./Games/GameGrid";
 export { default as GameGridHeading } from "./Games/GameGridHeading";
 export { default as GameCard } from "./Games/GameCard";
+export { default as GameCardEmoji } from "./Games/GameCardEmoji";
 export { default as GameCardSkeleton } from "./Games/GameCard/skeleton";
 export { default as GameCriticScore } from "./Games/GameCriticScore";
 

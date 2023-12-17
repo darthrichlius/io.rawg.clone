@@ -1,7 +1,7 @@
-import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, HStack, Heading, Image, Box } from "@chakra-ui/react";
 import { map as _map } from "lodash";
 import { ApiImage } from "@/services";
-import { GameCriticScore, GamePlatformList } from "@/components";
+import { GameCardEmoji, GameCriticScore, GamePlatformList } from "@/components";
 import { ApiGame } from "@/typing/api";
 import { UI_CONFIG } from "@/config/ui";
 import NoImagePlaceHolder from "@/assets/no-image-placeholder.webp";
@@ -31,6 +31,10 @@ const GameCard = ({ game }: Props) => {
           )}
           <GameCriticScore score={game.metacritic} />
         </HStack>
+        {/* The design is not ideal but this is just for POC */}
+        <Box>
+          <GameCardEmoji rating={game.rating_top} />
+        </Box>
       </CardBody>
     </Card>
   );
