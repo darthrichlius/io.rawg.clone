@@ -35,8 +35,13 @@ This file is aimed at collecting any **IMPROVEMENTS IDEAS** or TASKS related to 
 - Create a Member are with authentication
 - For members, get an alert when there is an update on a game (score, releases, ...)
 - Bind the game to news links that could interest members
+- Provide a search suggestion (Based on intern dabase and maybe ES)
 
 ### Technical
+
+#### Design
+
+- Create a layout to set a convenient spacing and add more pages
 
 #### Data
 

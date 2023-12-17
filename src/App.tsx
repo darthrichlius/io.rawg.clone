@@ -1,12 +1,13 @@
 import {
   GameGrid,
+  GameGridHeading,
   GameSortSelector,
   GenreList,
   NavBar,
   PlatformSelector,
 } from "@/components";
 import { ApiGameQuery } from "@/typing/api";
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
 
 function App() {
@@ -76,7 +77,14 @@ function App() {
             selectedGameSort={gameQuery.ordering}
           />
         </HStack>
-        <GameGrid filters={gameQuery.filters} ordering={gameQuery.ordering} search={gameQuery.search} />
+        <Box paddingX={10}>
+          <GameGridHeading query={gameQuery} />
+          <GameGrid
+            filters={gameQuery.filters}
+            ordering={gameQuery.ordering}
+            search={gameQuery.search}
+          />
+        </Box>
       </GridItem>
     </Grid>
   );

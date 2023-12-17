@@ -26,7 +26,7 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
           md: 2,
           lg: 3,
         }}
-        padding={10}
+        marginTop={10}
         spacing={10}
       >
         {loading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
