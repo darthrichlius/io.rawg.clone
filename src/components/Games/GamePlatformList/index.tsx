@@ -10,9 +10,11 @@ const GamePlatformList = ({ platforms }: Props) => {
   return (
     <HStack marginY={1}>
       {platforms &&
-        platforms.map((platform) => (
-          <GamePlatformIcon key={platform.id} slug={platform.slug} />
-        ))}
+        platforms.map((platform) =>
+          platform.slug ? (
+            <GamePlatformIcon key={platform.id} slug={platform.slug} />
+          ) : null
+        )}
     </HStack>
   );
 };

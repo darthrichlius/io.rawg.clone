@@ -1,11 +1,11 @@
 import API_CONFIG from "@/config/api";
 import useData from "./useData";
-import { ApiGamePlatform } from "@/typing/api";
+import { ApiGamePlatformParent } from "@/typing/api";
 import PlatformsStaticData from "@/data/static/platforms";
 
 const usePlatforms = () => {
-  const { data: platforms, ...rest } = useData<ApiGamePlatform>(
-    API_CONFIG.endpoints.parentPlatforms.getAll,
+  const { data: platforms, ...rest } = useData<ApiGamePlatformParent>(
+    API_CONFIG.endpoints.platformParents.getAll,
     undefined,
     undefined
   );

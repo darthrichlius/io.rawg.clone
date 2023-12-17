@@ -3,9 +3,9 @@ import { compact as _compact } from "lodash";
 import ApiConfig from "@/config/api";
 import {
   ApiGame,
-  ApiGamePlatform,
   ApiGameGenre,
   ApiGameGameSort,
+  ApiGamePlatformParent,
 } from "@/typing/api";
 import { buildDeps } from "./_utils";
 import useData from "./useData";
@@ -20,7 +20,7 @@ interface Props {
   filters?: {
     // As of this version, if we have filters, we have "genres"
     genres?: ApiGameGenre[] | [];
-    platforms?: ApiGamePlatform[] | [];
+    platforms?: ApiGamePlatformParent[] | [];
   };
   ordering?: ApiGameGameSort;
   search?: string;

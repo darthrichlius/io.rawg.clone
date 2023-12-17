@@ -1,4 +1,4 @@
-import { ApiGameGameSort, ApiGameGameSortSlug } from "@/typing/api";
+import { ApiGameGameSort } from "@/typing/api";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 

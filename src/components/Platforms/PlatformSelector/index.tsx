@@ -1,11 +1,11 @@
 import { usePlatforms } from "@/hooks";
-import { ApiGamePlatform } from "@/typing/api";
+import { ApiGamePlatformParent } from "@/typing/api";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
 interface Props {
-  selectedPlatform?: ApiGamePlatform;
-  onSelectedPlatform: (genre: ApiGamePlatform) => void;
+  selectedPlatform?: ApiGamePlatformParent;
+  onSelectedPlatform: (genre: ApiGamePlatformParent) => void;
 }
 
 const PlatformSelector = ({ selectedPlatform, onSelectedPlatform }: Props) => {

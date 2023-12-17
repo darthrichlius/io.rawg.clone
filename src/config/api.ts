@@ -1,7 +1,7 @@
 export interface ApiConfig {
   baseUrl: string;
   endpoints: Record<
-    "games" | "genres" | "parentPlatforms",
+    "games" | "genres" | "platformParents",
     Record<string, string>
   >;
 }
@@ -21,7 +21,7 @@ const API_CONFIG: ApiConfig = {
        */
       getAll: "/genres",
     },
-    parentPlatforms: {
+    platformParents: {
       /**
        * @see https://api.rawg.io/docs/#operation/platforms_lists_parents_list
        */
