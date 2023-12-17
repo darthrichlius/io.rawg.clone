@@ -1,7 +1,19 @@
 export interface ApiGamePlatform {
-  id: number;
-  slug: ApiGamePlatformIcon;
+  id: number | null;
   name: string;
+  slug: ApiGamePlatformIcon | null;
+  games_count: number | null;
+  image_background: string | null;
+  image: string | null;
+  year_start: string | null;
+  year_end: string | null;
+}
+
+export interface ApiGamePlatformParent {
+  id: number | null;
+  slug: ApiGamePlatformIcon | null;
+  name: string;
+  platforms: ApiGamePlatform[];
 }
 
 export interface ApiGame {
@@ -82,6 +94,7 @@ export interface ApiGameGenre {
   games_count: number;
   image_background: string;
   description: string;
+  games?: unknown;
 }
 
 // ###################################################
