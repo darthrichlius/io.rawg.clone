@@ -6,7 +6,7 @@ import {
   NavBar,
   PlatformSelector,
 } from "@/components";
-import { ApiGameQuery } from "@/typing/api";
+import { ApiGameQuery } from "@/types/api";
 import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
 

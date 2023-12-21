@@ -9,6 +9,7 @@ export interface ApiConfig {
       string,
       {
         endpoint: string;
+        limit?: number;
         CACHE_KEY: any;
       }
     >
@@ -20,7 +21,7 @@ const ApiConfig: ApiConfig = {
   /**
    * The game library is not a data that changes regularely
    * Setting a 24H staletime  (the time data is considered as fresh, no need to refresh)
-   * .. is 
+   * .. is
    */
   staleTime: 24 * 3_600_000, // 24H
   resources: {
@@ -30,6 +31,7 @@ const ApiConfig: ApiConfig = {
        */
       default: {
         endpoint: "/games",
+        limit: 6,
         CACHE_KEY: ["games"],
       },
     },

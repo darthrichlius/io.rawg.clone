@@ -1,5 +1,5 @@
 import { usePlatforms } from "@/hooks";
-import { ApiGamePlatformParent } from "@/typing/api";
+import { ApiGamePlatformParent } from "@/types/api";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 

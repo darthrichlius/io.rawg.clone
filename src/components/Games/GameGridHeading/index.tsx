@@ -1,5 +1,5 @@
 import { Heading } from "@chakra-ui/react";
-import { ApiGameQuery } from "@/typing/api";
+import { ApiGameQuery } from "@/types/api";
 
 interface Props {
   query: ApiGameQuery;
@@ -7,7 +7,8 @@ interface Props {
 
 const GameGridHeading = ({ query }: Props) => {
   const platform =
-    query?.filters?.parent_platforms && Array.isArray(query?.filters?.parent_platforms)
+    query?.filters?.parent_platforms &&
+    Array.isArray(query?.filters?.parent_platforms)
       ? query?.filters?.parent_platforms[0].name
       : "";
   const genre =

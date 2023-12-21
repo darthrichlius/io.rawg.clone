@@ -2,7 +2,7 @@ import { Card, CardBody, HStack, Heading, Image, Box } from "@chakra-ui/react";
 import { map as _map } from "lodash";
 import { ApiImage } from "@/services";
 import { GameCardEmoji, GameCriticScore, GamePlatformList } from "@/components";
-import { ApiGame } from "@/typing/api";
+import { ApiGame } from "@/types/api";
 import { UI_CONFIG } from "@/config/ui";
 import NoImagePlaceHolder from "@/assets/no-image-placeholder.webp";
 

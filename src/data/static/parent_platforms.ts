@@ -1,4 +1,4 @@
-import { ApiGamePlatformParent } from "@/typing/api";
+import { ApiGamePlatformParent } from "@/types/api";
 
 export default [
   {

@@ -2,8 +2,8 @@ import {
   ApiGameFiltersQuery,
   ApiGameGenre,
   ApiGamePlatformParent,
-  ApiGameQuery
-} from "@/typing/api";
+  ApiGameQuery,
+} from "@/types/api";
 import { isEmpty as _isEmpty, map as _map } from "lodash";
 
 /**
@@ -28,7 +28,7 @@ export const buildDeps = ({
     Object.keys(filters).map((k) => {
       const _k = k as keyof ApiGameFiltersQuery; // Type assertion for k
       if (!_isEmpty(filters[_k])) {
-        _filters[_k] = _map<(ApiGameGenre | ApiGamePlatformParent)>(
+        _filters[_k] = _map<ApiGameGenre | ApiGamePlatformParent>(
           filters[_k],
           "slug"
         ).join(",");

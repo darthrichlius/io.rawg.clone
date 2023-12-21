@@ -1,15 +1,21 @@
 import { AxiosRequestConfig } from "axios";
-import { compact as _compact, some as _some, isEmpty } from "lodash";
+import {
+  compact as _compact,
+  some as _some,
+  isEmpty as _isEmpty,
+  map as _map,
+  flatten as _flatten,
+} from "lodash";
 import ApiConfig from "@/config/api";
+import { ApiClient } from "@/services";
 import {
   ApiGame,
-  ApiGameGenre,
   ApiGameGameSort,
+  ApiGameGenre,
   ApiGamePlatformParent,
-} from "@/typing/api";
+} from "@/types/api";
 import { buildDeps } from "./_utils";
-import useData from "./useData";
-import { ApiClient } from "@/services";
+import useInfiniteData from "./useInfiniteData";
 
 /**
  * ! IMPORTANT
@@ -25,6 +31,7 @@ interface Props {
   };
   ordering?: ApiGameGameSort;
   search?: string;
+  page?: number;
 }
 
 /**
@@ -37,25 +44,34 @@ const useGames = ({
   ordering = undefined,
   search = undefined,
 }: Props) => {
-  const { data: games, ...rest } = useData<ApiGame>({
+  const { data, ...rest } = useInfiniteData<ApiGame>({
     qKey:
-      (filters && _some(filters, (v) => !isEmpty(v))) || ordering || search
+      (filters && _some(filters, (v) => !_isEmpty(v))) || ordering || search
         ? [
             ...ApiConfig.resources["games"].default.CACHE_KEY,
             buildDeps({ filters, ordering, search }),
           ]
         : ApiConfig.resources["games"].default.CACHE_KEY,
-    qFn: () =>
+    qFn: ({ pageParam }) =>
       ApiClient.getAll<ApiGame>({
         resource: "games",
-        config:
-          filters || ordering
-            ? buildParams({ filters, ordering, search })
-            : undefined,
+        config: {
+          params: {
+            page: pageParam,
+            search,
+            ordering,
+            page_size: ApiConfig.resources.games.default.limit || undefined,
+            ...(filters || ordering ? buildFilterParams({ filters }) : {}),
+          },
+        },
       }),
   });
 
-  return { games, loading: rest.isLoading, ...rest };
+  return {
+    games: data ? _flatten(_map(data?.pages, "results")) : [],
+    loading: rest.isLoading,
+    ...rest,
+  };
 };
 
 /**
@@ -63,12 +79,10 @@ const useGames = ({
  * @param filters
  * @returns
  */
-const buildParams = (props: Props): AxiosRequestConfig => {
+const buildFilterParams = (props: Props): AxiosRequestConfig["params"] => {
   const params: {
     genres?: string;
     parent_platforms?: string;
-    ordering?: string;
-    search?: string;
   } = {};
 
   if (props.filters?.genres && props.filters?.genres.length) {
@@ -85,17 +99,7 @@ const buildParams = (props: Props): AxiosRequestConfig => {
       .join(",");
   }
 
-  if (props.ordering) {
-    params["ordering"] = props.ordering.slug;
-  }
-
-  if (props.search) {
-    params["search"] = props.search;
-  }
-
-  return {
-    params: params,
-  };
+  return params;
 };
 
 export default useGames;

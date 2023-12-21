@@ -1,4 +1,4 @@
-import { ApiGameGameSort } from "@/typing/api";
+import { ApiGameGameSort } from "@/types/api";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
@@ -26,7 +26,6 @@ const GameSortSelector = ({
   /**
    * @todo Don't render the component as long as we don't have the game data to prevent the user to perform an action
    */
-
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>

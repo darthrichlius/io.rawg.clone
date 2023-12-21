@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import ApiConfig, { ApiResource } from "@/config/api";
-import { ApiDefaultResponse } from "@/typing/api";
+import { ApiDefaultResponse } from "@/types/api";
 
 const instance = axios.create({
   baseURL: ApiConfig.baseUrl,
@@ -19,7 +19,7 @@ const ApiService = {
         ApiConfig.resources[resource].default.endpoint,
         config
       )
-      .then((res) => res.data.results);
+      .then((res) => res.data);
   },
 };
 

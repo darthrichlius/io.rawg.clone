@@ -1,4 +1,4 @@
-import { ApiGameGenre } from "@/typing/api";
+import { ApiGameGenre } from "@/types/api";
 import useData from "./useData";
 import ApiConfig from "@/config/api";
 import GenresStaticData from "@/data/static/genres";
@@ -11,7 +11,7 @@ import { UseQueryOptions } from "@tanstack/react-query";
  * @returns {string} error - Error message resulting from the API operation, if any.
  */
 const useGenress = () => {
-  const { data: genres, ...rest } = useData<ApiGameGenre>({
+  const { data, ...rest } = useData<ApiGameGenre>({
     qKey: ApiConfig.resources["genres"].default.CACHE_KEY,
     qFn: () => ApiService.getAll<ApiGameGenre>({ resource: "genres" }),
     /**
@@ -20,11 +20,15 @@ const useGenress = () => {
      * The possibility of enabling fetch anyway make the process 100% reliable and consistent with the remote data
      */
     moreConfig: {
-      initialData: GenresStaticData,
+      initialData: {
+        results: GenresStaticData,
+      },
     } as UseQueryOptions,
   });
 
-  return { ...rest, genres };
+  console.debug(data);
+
+  return { ...rest, genres: data && data.results ? data.results : [] };
 };
 
 export default useGenress;

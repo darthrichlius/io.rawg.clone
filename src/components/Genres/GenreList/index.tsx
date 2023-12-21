@@ -1,6 +1,6 @@
 import { useGenres } from "@/hooks/";
 import { ApiImage } from "@/services";
-import { ApiGameGenre } from "@/typing/api";
+import { ApiGameGenre } from "@/types/api";
 import {
   HStack,
   Image,
