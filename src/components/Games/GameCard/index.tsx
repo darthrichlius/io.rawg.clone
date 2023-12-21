@@ -24,6 +24,7 @@ const GameCard = ({ game }: Props) => {
       <CardBody alignContent={"space-around"}>
         <Heading fontSize={"xl"}>{game.name}</Heading>
         <HStack justifyContent={"space-between"}>
+          {/* Having to map "platform" is a consequence of the BackEnd API faulty design */}
           {game.parent_platforms && (
             <GamePlatformList
               platforms={_map(game.parent_platforms, "platform")}

@@ -1,33 +1,57 @@
+export type ApiResource = "games" | "genres" | "parent_platforms";
+
 export interface ApiConfig {
   baseUrl: string;
-  endpoints: Record<
-    "games" | "genres" | "platformParents",
-    Record<string, string>
+  staleTime: number;
+  resources: Record<
+    ApiResource,
+    Record<
+      string,
+      {
+        endpoint: string;
+        CACHE_KEY: any;
+      }
+    >
   >;
 }
 
-const API_CONFIG: ApiConfig = {
+const ApiConfig: ApiConfig = {
   baseUrl: "https://api.rawg.io/api",
-  endpoints: {
+  /**
+   * The game library is not a data that changes regularely
+   * Setting a 24H staletime  (the time data is considered as fresh, no need to refresh)
+   * .. is 
+   */
+  staleTime: 24 * 3_600_000, // 24H
+  resources: {
     games: {
       /**
        * @see https://api.rawg.io/docs/#operation/games_list
        */
-      getAll: "/games",
+      default: {
+        endpoint: "/games",
+        CACHE_KEY: ["games"],
+      },
     },
     genres: {
       /**
        * @see https://api.rawg.io/docs/#operation/genres_list
        */
-      getAll: "/genres",
+      default: {
+        endpoint: "/genres",
+        CACHE_KEY: ["genres"],
+      },
     },
-    platformParents: {
+    parent_platforms: {
       /**
        * @see https://api.rawg.io/docs/#operation/platforms_lists_parents_list
        */
-      getAll: "/platforms/lists/parents",
+      default: {
+        endpoint: "/platforms/lists/parents",
+        CACHE_KEY: ["platforms_lists_parents"],
+      },
     },
   },
 };
 
-export default API_CONFIG;
+export default ApiConfig; // Declaring a real variable helps for the IDE

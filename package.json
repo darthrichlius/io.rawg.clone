@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@tanstack/react-query": "^5.14.2",
     "axios": "^1.6.2",
     "framer-motion": "^10.16.16",
     "lodash": "^4.17.21",
@@ -21,6 +22,7 @@
     "react-icons": "^4.12.0"
   },
   "devDependencies": {
+    "@tanstack/react-query-devtools": "^5.14.2",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",

@@ -14,12 +14,12 @@ const GameSortSelector = ({
   /**
    * @todo Decide if we put this part as part of the configuration or we let it here
    */
-  const gamesorts: Array<ApiGameGameSort> = [
+  const gameSorts: Array<ApiGameGameSort> = [
     { slug: "", name: "Relevance" },
     { slug: "name", name: "Name" },
     { slug: "-released", name: "Release date" }, // We show the newest first
     { slug: "-added", name: "Date added" }, // We show the newest first
-    { slug: "rating", name: "Popularity" },
+    { slug: "-rating", name: "Popularity" },
     { slug: "-metacritic", name: "Average rating" },
   ];
 
@@ -32,14 +32,14 @@ const GameSortSelector = ({
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>
         OrderBy: {selectedGameSort?.name || "Relevance"}
       </MenuButton>
-      {gamesorts && (
+      {gameSorts && (
         <MenuList>
-          {gamesorts.map((gamesort) => (
+          {gameSorts.map((gameSort) => (
             <MenuItem
-              key={gamesort.slug}
-              onClick={() => onSelectedGameSort(gamesort)}
+              key={gameSort.slug}
+              onClick={() => onSelectedGameSort(gameSort)}
             >
-              {gamesort.name}
+              {gameSort.name}
             </MenuItem>
           ))}
         </MenuList>

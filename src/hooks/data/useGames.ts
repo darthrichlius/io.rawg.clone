@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { compact as _compact } from "lodash";
+import { compact as _compact, some as _some, isEmpty } from "lodash";
 import ApiConfig from "@/config/api";
 import {
   ApiGame,
@@ -9,6 +9,7 @@ import {
 } from "@/typing/api";
 import { buildDeps } from "./_utils";
 import useData from "./useData";
+import { ApiClient } from "@/services";
 
 /**
  * ! IMPORTANT
@@ -20,7 +21,7 @@ interface Props {
   filters?: {
     // As of this version, if we have filters, we have "genres"
     genres?: ApiGameGenre[] | [];
-    platforms?: ApiGamePlatformParent[] | [];
+    parent_platforms?: ApiGamePlatformParent[] | [];
   };
   ordering?: ApiGameGameSort;
   search?: string;
@@ -36,15 +37,26 @@ const useGames = ({
   ordering = undefined,
   search = undefined,
 }: Props) => {
-  const { data: games, ...rest } = useData<ApiGame>(
-    ApiConfig.endpoints.games.getAll,
-    filters || ordering
-      ? buildParams({ filters, ordering, search })
-      : undefined,
-    filters || ordering ? buildDeps({ filters, ordering, search }) : ""
-  );
+  console.debug(filters, ordering, search);
+  const { data: games, ...rest } = useData<ApiGame>({
+    qKey:
+      (filters && _some(filters, (v) => !isEmpty(v))) || ordering || search
+        ? [
+            ...ApiConfig.resources["games"].default.CACHE_KEY,
+            buildDeps({ filters, ordering, search }),
+          ]
+        : ApiConfig.resources["games"].default.CACHE_KEY,
+    qFn: () =>
+      ApiClient.getAll<ApiGame>({
+        resource: "games",
+        config:
+          filters || ordering
+            ? buildParams({ filters, ordering, search })
+            : undefined,
+      }),
+  });
 
-  return { games, ...rest };
+  return { games, loading: rest.isLoading, ...rest };
 };
 
 /**
@@ -55,7 +67,7 @@ const useGames = ({
 const buildParams = (props: Props): AxiosRequestConfig => {
   const params: {
     genres?: string;
-    platforms?: string;
+    parent_platforms?: string;
     ordering?: string;
     search?: string;
   } = {};
@@ -65,8 +77,8 @@ const buildParams = (props: Props): AxiosRequestConfig => {
       .map((genre) => genre.id)
       .join(",");
   }
-  if (props.filters?.platforms && props.filters?.platforms.length) {
-    params["platforms"] = _compact(props.filters?.platforms)
+  if (props.filters?.parent_platforms && props.filters?.parent_platforms.length) {
+    params["parent_platforms"] = _compact(props.filters?.parent_platforms)
       .map((platform) => platform.id)
       .join(",");
   }

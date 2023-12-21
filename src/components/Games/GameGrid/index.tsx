@@ -10,7 +10,7 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
   const { games, loading, error } = useGames({
     filters: {
       genres: _compact(filters?.genres ?? []),
-      platforms: _compact(filters?.platforms ?? []),
+      parent_platforms: _compact(filters?.parent_platforms ?? []),
     },
     ordering,
     search,

@@ -30,6 +30,6 @@
       "@config/*": ["./src/config/*"],
     }
   },
-  "include": ["src"],
+  "include": ["src", ".ignore/Trash/useData.old.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

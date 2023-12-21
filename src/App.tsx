@@ -56,14 +56,14 @@ function App() {
         <HStack paddingX={10} spacing={5}>
           <PlatformSelector
             selectedPlatform={
-              gameQuery?.filters?.platforms
-                ? gameQuery.filters.platforms[0] // IF `gameQuery.filters.platforms` exists, it is necessarely an Array
+              gameQuery?.filters?.parent_platforms
+                ? gameQuery.filters.parent_platforms[0] // IF `gameQuery.filters.parent_platforms` exists, it is necessarely an Array
                 : undefined
             }
             onSelectedPlatform={(platform) =>
               setGameQuery({
                 ...gameQuery,
-                filters: { ...gameQuery.filters, platforms: [platform] },
+                filters: { ...gameQuery.filters, parent_platforms: [platform] },
               })
             }
           />

@@ -7,8 +7,8 @@ interface Props {
 
 const GameGridHeading = ({ query }: Props) => {
   const platform =
-    query?.filters?.platforms && Array.isArray(query?.filters?.platforms)
-      ? query?.filters?.platforms[0].name
+    query?.filters?.parent_platforms && Array.isArray(query?.filters?.parent_platforms)
+      ? query?.filters?.parent_platforms[0].name
       : "";
   const genre =
     query?.filters?.genres && Array.isArray(query?.filters?.genres)

@@ -107,7 +107,7 @@ export interface ApiGameQuery {
 
 export interface ApiGameFiltersQuery {
   genres?: ApiGameGenre[];
-  platforms?: ApiGamePlatformParent[];
+  parent_platforms?: ApiGamePlatformParent[];
 }
 
 export interface ApiGameGameSort {

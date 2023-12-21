@@ -1,9 +1,27 @@
-import axios from "axios";
-import ApiConfig from "@/config/api";
+import axios, { AxiosRequestConfig } from "axios";
+import ApiConfig, { ApiResource } from "@/config/api";
+import { ApiDefaultResponse } from "@/typing/api";
 
 const instance = axios.create({
   baseURL: ApiConfig.baseUrl,
 });
+
+const ApiService = {
+  getAll: <T>({
+    resource,
+    config,
+  }: {
+    resource: ApiResource;
+    config?: AxiosRequestConfig;
+  }) => {
+    return instance
+      .get<ApiDefaultResponse<T>>(
+        ApiConfig.resources[resource].default.endpoint,
+        config
+      )
+      .then((res) => res.data.results);
+  },
+};
 
 /**
  * ! IMPORTANT
@@ -19,4 +37,4 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-export default instance;
+export default ApiService;

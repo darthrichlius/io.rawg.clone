@@ -1,4 +1,10 @@
-import { ApiGameQuery } from "@/typing/api";
+import {
+  ApiGameFiltersQuery,
+  ApiGameGenre,
+  ApiGamePlatformParent,
+  ApiGameQuery
+} from "@/typing/api";
+import { isEmpty as _isEmpty, map as _map } from "lodash";
 
 /**
  * Create a form of checksum to indicate changes to `useEffect()`.
@@ -10,15 +16,29 @@ import { ApiGameQuery } from "@/typing/api";
  * @param filters
  * @returns
  */
-export const buildDeps = ({ filters, ordering, search }: ApiGameQuery): string => {
-  let checksum = filters
-    ? Object.values(filters)
-        .flat()
-        .map((filter) => filter.id)
-        .join(",")
-    : "";
-  checksum += ordering?.slug ?? "";
-  checksum += search ?? "";
+export const buildDeps = ({
+  filters,
+  ordering,
+  search,
+}: ApiGameQuery): string => {
+  let deps = "";
+  const _filters: { [key in keyof ApiGameFiltersQuery]: string } = {};
 
-  return checksum;
+  if (filters) {
+    Object.keys(filters).map((k) => {
+      const _k = k as keyof ApiGameFiltersQuery; // Type assertion for k
+      if (!_isEmpty(filters[_k])) {
+        _filters[_k] = _map<(ApiGameGenre | ApiGamePlatformParent)>(
+          filters[_k],
+          "slug"
+        ).join(",");
+        deps += `${k}: ${_filters[_k]};`;
+      }
+    });
+  }
+
+  if (ordering?.slug) deps += `orderBy: ${ordering?.slug};`;
+  if (search) deps += `search: ${search}`;
+
+  return deps;
 };
