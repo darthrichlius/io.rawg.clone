@@ -37,7 +37,6 @@ const useGames = ({
   ordering = undefined,
   search = undefined,
 }: Props) => {
-  console.debug(filters, ordering, search);
   const { data: games, ...rest } = useData<ApiGame>({
     qKey:
       (filters && _some(filters, (v) => !isEmpty(v))) || ordering || search
@@ -77,7 +76,10 @@ const buildParams = (props: Props): AxiosRequestConfig => {
       .map((genre) => genre.id)
       .join(",");
   }
-  if (props.filters?.parent_platforms && props.filters?.parent_platforms.length) {
+  if (
+    props.filters?.parent_platforms &&
+    props.filters?.parent_platforms.length
+  ) {
     params["parent_platforms"] = _compact(props.filters?.parent_platforms)
       .map((platform) => platform.id)
       .join(",");
