@@ -1,10 +1,12 @@
-import { Box, Button, SimpleGrid, useToast } from "@chakra-ui/react";
+import { Box, Button, SimpleGrid, Spinner, useToast } from "@chakra-ui/react";
 import { compact as _compact } from "lodash";
 import { GameCard, GameCardSkeleton } from "@/components";
 import { useGames } from "@/hooks";
 import { ApiGameQuery } from "@/types/api";
 import { ArrayUtils } from "@/utils";
 import ApiConfig from "@/config/api";
+import InfiniteScroll from "react-infinite-scroll-component";
+import AppConfig from "@/config/app";
 
 const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
   const toast = useToast();
@@ -41,28 +43,52 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
 
   return (
     <Box marginY={10}>
-      <SimpleGrid
-        columns={{
-          sm: 1,
-          md: 2,
-          lg: 3,
-          xl: 4,
-        }}
-        spacing={10}
-      >
-        {loading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
-        {!loading &&
-          games &&
-          games.map((game) => <GameCard key={game.id} game={game} />)}
-      </SimpleGrid>
-      <Box marginTop={10} onClick={() => fetchNextPage()}>
-        {!loading && hasNextPage && (
-          <Button isLoading={isFetchingNextPage}>
-            Load More {isFetchingNextPage && "..."}
-          </Button>
-        )}
-      </Box>
+      {AppConfig.games?.infiniteScroll && (
+        <InfiniteScroll
+          dataLength={games.length}
+          hasMore={hasNextPage}
+          next={() => fetchNextPage()}
+          loader={<Spinner />}
+        >
+          <DataGrid games={games} loading={loading} skeletons={skeletons} marginBottom={10} />
+        </InfiniteScroll>
+      )}
+      {!AppConfig.games?.infiniteScroll && (
+        <>
+          <DataGrid games={games} loading={loading} skeletons={skeletons} />
+          <Box marginTop={10}>
+            {!loading && hasNextPage && (
+              <Button
+                isLoading={isFetchingNextPage}
+                onClick={() => fetchNextPage()}
+              >
+                Load More {isFetchingNextPage && "..."}
+              </Button>
+            )}
+          </Box>
+        </>
+      )}
     </Box>
+  );
+};
+
+const DataGrid = ({ games, loading, skeletons, ...rest }) => {
+  return (
+    <SimpleGrid
+      columns={{
+        sm: 1,
+        md: 2,
+        lg: 3,
+        xl: 4,
+      }}
+      spacing={10}
+      {...rest}
+    >
+      {loading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
+      {!loading &&
+        games &&
+        games.map((game) => <GameCard key={game.id} game={game} />)}
+    </SimpleGrid>
   );
 };
 

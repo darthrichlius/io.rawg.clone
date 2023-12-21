@@ -31,7 +31,7 @@ const ApiConfig: ApiConfig = {
        */
       default: {
         endpoint: "/games",
-        limit: 6,
+        limit: 12,
         CACHE_KEY: ["games"],
       },
     },
