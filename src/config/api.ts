@@ -1,3 +1,4 @@
+import ms from "ms";
 export type ApiResource = "games" | "genres" | "parent_platforms";
 
 export interface ApiConfig {
@@ -22,8 +23,13 @@ const ApiConfig: ApiConfig = {
    * The game library is not a data that changes regularely
    * Setting a 24H staletime  (the time data is considered as fresh, no need to refresh)
    * .. is
+   *
+   * ! IMPORTANT
+   * We could have simply used a manuam calculation like 24 * 3_600_000
+   * This is just a "choice" for better readibility (and fun... don't blame me :/)
+   * The lib is 6kb so ...
    */
-  staleTime: 24 * 3_600_000, // 24H
+  staleTime: ms("24h"),
   resources: {
     games: {
       /**
