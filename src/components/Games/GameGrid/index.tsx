@@ -2,7 +2,7 @@ import { Box, Button, SimpleGrid, Spinner, useToast } from "@chakra-ui/react";
 import { compact as _compact } from "lodash";
 import { GameCard, GameCardSkeleton } from "@/components";
 import { useGames } from "@/hooks";
-import { ApiGameQuery } from "@/types/api";
+import { ApiGame, ApiGameQuery } from "@/types/api";
 import { ArrayUtils } from "@/utils";
 import ApiConfig from "@/config/api";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -50,7 +50,12 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
           next={() => fetchNextPage()}
           loader={<Spinner />}
         >
-          <DataGrid games={games} loading={loading} skeletons={skeletons} marginBottom={10} />
+          <DataGrid
+            games={games}
+            loading={loading}
+            skeletons={skeletons}
+            marginBottom={10}
+          />
         </InfiniteScroll>
       )}
       {!AppConfig.games?.infiniteScroll && (
@@ -72,7 +77,17 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
   );
 };
 
-const DataGrid = ({ games, loading, skeletons, ...rest }) => {
+const DataGrid = ({
+  games,
+  loading,
+  skeletons,
+  ...rest
+}: {
+  games: ApiGame[];
+  loading: boolean;
+  skeletons: number[];
+  [key: string]: unknown;
+}) => {
   return (
     <SimpleGrid
       columns={{

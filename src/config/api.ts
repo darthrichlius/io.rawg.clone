@@ -11,7 +11,7 @@ export interface ApiConfig {
       {
         endpoint: string;
         limit?: number;
-        CACHE_KEY: any;
+        CACHE_KEY: Array<string>;
       }
     >
   >;
