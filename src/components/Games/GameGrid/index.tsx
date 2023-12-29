@@ -2,7 +2,6 @@ import { GameCard, GameCardSkeleton } from "@/components";
 import ApiConfig from "@/config/api";
 import AppConfig from "@/config/app";
 import { useGames } from "@/hooks";
-import { useGameQueryStore } from "@/stores";
 import { ApiGame } from "@/types/api";
 import { ArrayUtils } from "@/utils";
 import { Box, Button, SimpleGrid, Spinner, useToast } from "@chakra-ui/react";
