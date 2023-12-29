@@ -1,16 +1,18 @@
 import { usePlatforms } from "@/hooks";
-import { ApiGamePlatformParent } from "@/types/api";
+import { useGameQueryStore } from "@/stores";
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 
-interface Props {
-  selectedPlatform?: ApiGamePlatformParent;
-  onSelectedPlatform: (genre: ApiGamePlatformParent) => void;
-}
-
-const PlatformSelector = ({ selectedPlatform, onSelectedPlatform }: Props) => {
+const PlatformSelector = () => {
   const { platforms, isLoading, error } = usePlatforms();
+
+  const { selectedPlatform, onSelectedPlatform } = useGameQueryStore((s) => ({
+    selectedPlatform: s.filters.parent_platform,
+    onSelectedPlatform: s.setPlatformsFilter,
+  }));
+
   if (isLoading || error) return;
+
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<BsChevronDown />}>

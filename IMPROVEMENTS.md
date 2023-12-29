@@ -15,6 +15,8 @@ This file is aimed at collecting any **IMPROVEMENTS IDEAS** or TASKS related to 
 
 ### PATCH
 
+- Make sure accessing data through an object ("filters") doesn't have caveats
+  - We talk about the fact any change to one of the object properties has an impact on all objects
 - Refactor the code to avoid passing "onSearch" throughout Component as it is a open door to deep nesting
 - We must decide it we want to keep the implementation with the individual parameters passed to GameList
   - It creates so much noise and code smell

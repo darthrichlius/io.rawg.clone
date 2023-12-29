@@ -26,8 +26,6 @@ const useGenress = () => {
     } as UseQueryOptions,
   });
 
-  console.debug(data);
-
   return { ...rest, genres: data && data.results ? data.results : [] };
 };
 

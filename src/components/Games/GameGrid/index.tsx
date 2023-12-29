@@ -1,14 +1,14 @@
-import { Box, Button, SimpleGrid, Spinner, useToast } from "@chakra-ui/react";
-import { compact as _compact } from "lodash";
 import { GameCard, GameCardSkeleton } from "@/components";
-import { useGames } from "@/hooks";
-import { ApiGame, ApiGameQuery } from "@/types/api";
-import { ArrayUtils } from "@/utils";
 import ApiConfig from "@/config/api";
-import InfiniteScroll from "react-infinite-scroll-component";
 import AppConfig from "@/config/app";
+import { useGames } from "@/hooks";
+import { useGameQueryStore } from "@/stores";
+import { ApiGame } from "@/types/api";
+import { ArrayUtils } from "@/utils";
+import { Box, Button, SimpleGrid, Spinner, useToast } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
+const GameGrid = () => {
   const toast = useToast();
   const skeletons = ArrayUtils.newRandomArray(
     ApiConfig.resources.games.default.limit || 8
@@ -21,14 +21,7 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useGames({
-    filters: {
-      genres: _compact(filters?.genres ?? []),
-      parent_platforms: _compact(filters?.parent_platforms ?? []),
-    },
-    ordering,
-    search,
-  });
+  } = useGames();
 
   if (error) {
     toast({

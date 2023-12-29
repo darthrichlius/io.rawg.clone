@@ -1,23 +1,24 @@
 import { useGenres } from "@/hooks/";
 import { ApiImage } from "@/services";
+import { useGameQueryStore } from "@/stores";
 import { ApiGameGenre } from "@/types/api";
 import {
+  Button,
   HStack,
+  Heading,
   Image,
   List,
   ListItem,
   Spinner,
-  Button,
-  Heading,
 } from "@chakra-ui/react";
 
-interface Props {
-  onSelectedGenre: (genre: ApiGameGenre) => void;
-  selectedGenre?: ApiGameGenre;
-}
-
-const GenreList = ({ selectedGenre, onSelectedGenre }: Props) => {
+const GenreList = () => {
   const { genres, isLoading, error } = useGenres();
+
+  const { selectedGenre, onSelectedGenre } = useGameQueryStore((s) => ({
+    selectedGenre: s.filters.genre,
+    onSelectedGenre: s.setGenresFilter,
+  }));
 
   if (isLoading) return <Spinner />;
 

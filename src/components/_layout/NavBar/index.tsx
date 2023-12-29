@@ -2,12 +2,13 @@ import { Grid, HStack, Image, Text } from "@chakra-ui/react";
 import logo from "@assets/logo.webp";
 import ConfigApp from "@config/app";
 import { ColorModeSwitch, SearchInput } from "@/components";
+import { useGameQueryStore } from "@/stores";
 
-interface Props {
-  onSearch: (searchInput: string) => void;
-}
+const NavBar = () => {
+  const { onSearch } = useGameQueryStore((s) => ({
+    onSearch: s.setSearch,
+  }));
 
-const NavBar = ({ onSearch }: Props) => {
   return (
     <Grid
       templateColumns={{
@@ -21,7 +22,7 @@ const NavBar = ({ onSearch }: Props) => {
         <Text>{ConfigApp.app_name}</Text>
       </HStack>
       <HStack justifyContent={"space-between"} paddingX={10}>
-        <SearchInput onSearch={onSearch} />
+        <SearchInput onSearch={onSearch} placeholder="Search Games" />
         <ColorModeSwitch />
       </HStack>
     </Grid>
