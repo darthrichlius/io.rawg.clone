@@ -1,6 +1,5 @@
-import axios, { AxiosRequestConfig } from "axios";
 import ApiConfig, { ApiResource } from "@/config/api";
-import { ApiDefaultResponse } from "@/types/api";
+import axios, { AxiosRequestConfig } from "axios";
 
 const instance = axios.create({
   baseURL: ApiConfig.baseUrl,

@@ -2,6 +2,7 @@ import ApiConfig from "@/config/api";
 import { ApiClient } from "@/services";
 import { useGameQueryStore } from "@/stores";
 import {
+  ApiDefaultResponse,
   ApiGame,
   ApiGameGameSort,
   ApiGameGenre,
@@ -52,7 +53,7 @@ const useGames = () => {
     parent_platforms: parent_platform ? [parent_platform] : [],
   };
 
-  const { data, ...rest } = useInfiniteData<ApiGame>({
+  const { data, ...rest } = useInfiniteData<ApiDefaultResponse<ApiGame>>({
     qKey:
       (filters && _some(filters, (v) => !_isEmpty(v))) || ordering || search
         ? [
@@ -61,7 +62,7 @@ const useGames = () => {
           ]
         : ApiConfig.resources["games"].default.CACHE_KEY,
     qFn: ({ pageParam }) =>
-      ApiClient.getAll<ApiGame>({
+      ApiClient.getAll<ApiDefaultResponse<ApiGame>>({
         resource: "games",
         config: {
           params: {
