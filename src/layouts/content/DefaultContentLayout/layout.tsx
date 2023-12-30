@@ -15,7 +15,7 @@ const DefaultContentLayout = () => {
       }}
     >
       <Show above="lg">
-        <GridItem area="aside" bg="transparent" paddingX={5}>
+        <GridItem area="aside" bg="transparent">
           <GenreList />
         </GridItem>
       </Show>

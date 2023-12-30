@@ -3,6 +3,7 @@
 export { default as NavBar } from "./_layout/NavBar";
 export { default as SearchInput } from "./_layout/SearchInput";
 export { default as ColorModeSwitch } from "./_layout/ColorModeSwitch";
+export { default as ExpandableText } from "./_layout/ExpandableText";
 
 // # RESOURCES/GAMES
 
