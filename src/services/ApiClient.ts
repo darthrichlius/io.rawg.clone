@@ -15,10 +15,23 @@ const ApiService = {
     config?: AxiosRequestConfig;
   }) => {
     return instance
-      .get<ApiDefaultResponse<T>>(
+      .get<T>(
         ApiConfig.resources[resource].default.endpoint,
         config
       )
+      .then((res) => res.data);
+  },
+  getOne: <T>({
+    resource,
+    config,
+    URL,
+  }: {
+    resource: ApiResource;
+    config?: AxiosRequestConfig;
+    URL?: string;
+  }) => {
+    return instance
+      .get<T>(URL ?? ApiConfig.resources[resource].default.endpoint, config)
       .then((res) => res.data);
   },
 };

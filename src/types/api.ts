@@ -22,6 +22,7 @@ export interface ApiGame {
   name: string;
   name_original: string;
   description: string;
+  description_raw: string; // not documented but exists
   metacritic: number;
   metacritic_platforms: [
     {

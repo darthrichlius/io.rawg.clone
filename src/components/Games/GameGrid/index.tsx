@@ -90,6 +90,7 @@ const DataGrid = ({
       }}
       spacing={10}
       {...rest}
+      overflow={"visible"}
     >
       {loading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
       {!loading &&

@@ -1,15 +1,15 @@
 import ApiConfig from "@/config/api";
 import useData from "./useData";
-import { ApiGamePlatformParent } from "@/types/api";
+import { ApiDefaultResponse, ApiGamePlatformParent } from "@/types/api";
 import PlatformsStaticData from "@/data/static/parent_platforms";
 import ApiService from "@/services/ApiClient";
 import { UseQueryOptions } from "@tanstack/react-query";
 
 const usePlatforms = () => {
-  const { data, ...rest } = useData<ApiGamePlatformParent>({
+  const { data, ...rest } = useData<ApiDefaultResponse<ApiGamePlatformParent>>({
     qKey: ApiConfig.resources["parent_platforms"].default.CACHE_KEY,
     qFn: () =>
-      ApiService.getAll<ApiGamePlatformParent>({
+      ApiService.getAll<ApiDefaultResponse<ApiGamePlatformParent>>({
         resource: "parent_platforms",
       }),
     moreConfig: {

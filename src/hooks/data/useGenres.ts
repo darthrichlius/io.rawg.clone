@@ -1,4 +1,4 @@
-import { ApiGameGenre } from "@/types/api";
+import { ApiDefaultResponse, ApiGameGenre } from "@/types/api";
 import useData from "./useData";
 import ApiConfig from "@/config/api";
 import GenresStaticData from "@/data/static/genres";
@@ -11,9 +11,12 @@ import { UseQueryOptions } from "@tanstack/react-query";
  * @returns {string} error - Error message resulting from the API operation, if any.
  */
 const useGenress = () => {
-  const { data, ...rest } = useData<ApiGameGenre>({
+  const { data, ...rest } = useData<ApiDefaultResponse<ApiGameGenre>>({
     qKey: ApiConfig.resources["genres"].default.CACHE_KEY,
-    qFn: () => ApiService.getAll<ApiGameGenre>({ resource: "genres" }),
+    qFn: () =>
+      ApiService.getAll<ApiDefaultResponse<ApiGameGenre>>({
+        resource: "genres",
+      }),
     /**
      * There is a very low probability "Genres" data to change
      * Therefore we can rely on static data then update them afterwards
