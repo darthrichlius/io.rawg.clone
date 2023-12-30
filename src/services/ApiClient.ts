@@ -6,21 +6,7 @@ const instance = axios.create({
 });
 
 const ApiService = {
-  getAll: <T>({
-    resource,
-    config,
-  }: {
-    resource: ApiResource;
-    config?: AxiosRequestConfig;
-  }) => {
-    return instance
-      .get<T>(
-        ApiConfig.resources[resource].default.endpoint,
-        config
-      )
-      .then((res) => res.data);
-  },
-  getOne: <T>({
+  get: <T>({
     resource,
     config,
     URL,

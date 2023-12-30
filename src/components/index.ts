@@ -13,6 +13,8 @@ export { default as GameCard } from "./Games/GameCard";
 export { default as GameCardEmoji } from "./Games/GameCardEmoji";
 export { default as GameCardSkeleton } from "./Games/GameCard/skeleton";
 export { default as GameCriticScore } from "./Games/GameCriticScore";
+export { default as GameAttributes } from "./Games/GameAttributes";
+export { default as GameTrailer } from "./Games/GameTrailer";
 
 export { default as GamePlatformIcon } from "./Games/GamePlatformIcon";
 

@@ -14,7 +14,7 @@ const useGenress = () => {
   const { data, ...rest } = useData<ApiDefaultResponse<ApiGameGenre>>({
     qKey: ApiConfig.resources["genres"].default.CACHE_KEY,
     qFn: () =>
-      ApiService.getAll<ApiDefaultResponse<ApiGameGenre>>({
+      ApiService.get<ApiDefaultResponse<ApiGameGenre>>({
         resource: "genres",
       }),
     /**

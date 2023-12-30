@@ -62,7 +62,7 @@ const useGames = () => {
           ]
         : ApiConfig.resources["games"].default.CACHE_KEY,
     qFn: ({ pageParam }) =>
-      ApiClient.getAll<ApiDefaultResponse<ApiGame>>({
+      ApiClient.get<ApiDefaultResponse<ApiGame>>({
         resource: "games",
         config: {
           params: {

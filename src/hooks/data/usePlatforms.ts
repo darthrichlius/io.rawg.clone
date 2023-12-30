@@ -9,7 +9,7 @@ const usePlatforms = () => {
   const { data, ...rest } = useData<ApiDefaultResponse<ApiGamePlatformParent>>({
     qKey: ApiConfig.resources["parent_platforms"].default.CACHE_KEY,
     qFn: () =>
-      ApiService.getAll<ApiDefaultResponse<ApiGamePlatformParent>>({
+      ApiService.get<ApiDefaultResponse<ApiGamePlatformParent>>({
         resource: "parent_platforms",
       }),
     moreConfig: {

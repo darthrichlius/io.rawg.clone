@@ -1,8 +1,6 @@
 import ApiConfig from "@/config/api";
 import { ApiClient } from "@/services";
-import {
-  ApiGame
-} from "@/types/api";
+import { ApiGame } from "@/types/api";
 import useData from "./useData";
 
 const useGame = (
@@ -15,9 +13,9 @@ const useGame = (
   const resource = "games";
   const URL = `${ApiConfig.resources[resource].default.endpoint}/${slug}`;
   const { data, ...rest } = useData<ApiGame>({
-    qKey: [...ApiConfig.resources[resource].default.CACHE_KEY, `slug: ${slug}`],
+    qKey: [...ApiConfig.resources[resource].default.CACHE_KEY, `id: ${slug}`],
     qFn: () =>
-      ApiClient.getOne<ApiGame>({
+      ApiClient.get<ApiGame>({
         resource: resource,
         URL,
       }),
