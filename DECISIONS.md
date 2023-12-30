@@ -87,6 +87,18 @@ Maintaining `useGames()` and `useGenres()` serves multiple purposes:
 - The goal was to implement, assess that pattern, and learn from it.
 - Again, this is a demonstration of the implementation of different layout scenarios: **PageLayout** and **ContentLayout**.
 
+### Why Use `page.tsx` and `layout.tsx` Instead of Just `index.tsx` Everywhere?
+
+- Firstly, there is no strict convention for naming files and folders in React.
+  - Some frameworks, like Next.js, have their own conventions. However, as this is a "React-Sans" project, we have the flexibility to establish our own conventions.
+  - Of course, we could have utilized `index.tsx` for all JSX files; that option was available.
+- However, the decision to make these distinctions was to align our architecture with Next.js, which serves as a reference when working with React.
+  - To be more specific, this decision is strategic and based on personal insights.
+  - As a full-stack developer accustomed to working in various environments, maintaining consistency eases context switching and provides a seamless experience.
+- Finally, adopting this approach has no negative impact.
+  - Firstly, each `page.tsx` file is stored in a folder with the proper name, making it easy to find them throughout the IDE.
+  - Secondly, the components are exported through a single file where each has the appropriate name. Therefore, importing the component is transparent in the client file, avoiding unnecessary noise and complexity.
+
 ## Design & Styling
 
 ### Why Chakra UI?

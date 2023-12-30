@@ -1,11 +1,12 @@
 import { DefaulPageLayout, DefaultContentLayout } from "@/layouts";
-import { GameDetailPage, GameListPage } from "@/pages";
+import { GameDetailPage, GameListPage, ErrorPage } from "@/pages";
 import { createBrowserRouter } from "react-router-dom";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <DefaulPageLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         element: <DefaultContentLayout />,
