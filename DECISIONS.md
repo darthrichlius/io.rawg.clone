@@ -80,6 +80,13 @@ Maintaining `useGames()` and `useGenres()` serves multiple purposes:
 - Up to this point, the current method has been operational without manifesting complexity.
 - Anytime in the future, if we find that this approach impacts code maintainability, security, reliability, or scalability, we will consider trying another approach.
 
+### Why Creating DefaultContentLayout?
+
+- Creating `<DefaultContentLayout />` was definitely not necessary at this stage and can be qualified as **"coding by anticipation"** or **"unnecessary complexity"**.
+- However, this project is a POC and an opportunity for testing and improvement.
+- The goal was to implement, assess that pattern, and learn from it.
+- Again, this is a demonstration of the implementation of different layout scenarios: **PageLayout** and **ContentLayout**.
+
 ## Design & Styling
 
 ### Why Chakra UI?

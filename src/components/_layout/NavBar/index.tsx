@@ -3,6 +3,7 @@ import logo from "@assets/logo.webp";
 import ConfigApp from "@config/app";
 import { ColorModeSwitch, SearchInput } from "@/components";
 import { useGameQueryStore } from "@/stores";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const { onSearch } = useGameQueryStore((s) => ({
@@ -19,7 +20,9 @@ const NavBar = () => {
     >
       <HStack>
         <Image src={logo} boxSize={"60px"} />
-        <Text>{ConfigApp.app_name}</Text>
+        <Link to="/">
+          <Text>{ConfigApp.app_name}</Text>
+        </Link>
       </HStack>
       <HStack justifyContent={"space-between"} paddingX={10}>
         <SearchInput onSearch={onSearch} placeholder="Search Games" />
