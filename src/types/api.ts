@@ -16,6 +16,14 @@ export interface ApiGamePlatformParent {
   platforms: ApiGamePlatform[];
 }
 
+export interface ApiGamePublisher {
+  id: number | null;
+  name: string;
+  slug: ApiGamePlatformIcon | null;
+  games_count: number | null;
+  image_background: string | null;
+}
+
 export interface ApiGame {
   id: number;
   slug: string;
@@ -74,6 +82,8 @@ export interface ApiGame {
       };
     }
   ];
+  genres?: ApiGameGenre[];
+  publishers?: ApiGamePublisher[];
 }
 
 export enum ApiGamePlatformIcon {

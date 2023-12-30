@@ -1,12 +1,12 @@
-# GameHub - A of Rawg.io Clone Experiment
+# GameHub: A Video Game Browser - Technical Experimention
 
-This project aims to create a web application clone similar to Rawg.io, named "GameHub".
+This private project is intended to create a web application for browsing video games.
 
 ## Project Overview
 
 ### Project Context (Why Start This Project?)
 
-- This project is an integral part of my personal portfolio, designed to showcase a series of "Proof-Of-Concept" or "Proof-Of-Skills" projects.
+- This project is part of my personal portfolio, designed to showcase a series of "Proof-Of-Skills" or "Proof-Of-Concept" projects.
 
 - Each portfolio entry is focused on **strengthening my core skills**, **exploring new concepts or technologies**, and **developing reusable boilerplate templates** for future applications.
 - Emphasizing **clean architecture** and **high-quality code** is a priority for me.
