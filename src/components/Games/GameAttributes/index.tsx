@@ -45,7 +45,7 @@ const DescriptionItem = ({
   children: ReactNode | ReactNode[];
 }) => {
   return (
-    <Box>
+    <Box marginTop={8}>
       <Heading as="dt" fontSize="md" color="gray.600">
         {title}
       </Heading>

@@ -161,3 +161,12 @@ export interface ApiGameTrailer {
     max: string;
   };
 }
+
+export interface ApiGameScreenShoot {
+  id: number;
+  image: string;
+  hidden: boolean;
+  width: number;
+  height: number;
+  is_deleted: number;
+}

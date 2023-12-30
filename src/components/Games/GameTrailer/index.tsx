@@ -1,12 +1,12 @@
 import { useGameTrailers } from "@/hooks";
-import { Spinner } from "@chakra-ui/react";
+import { Box, Spinner } from "@chakra-ui/react";
 
 interface Props {
   slug: string;
 }
 
 const GameTrailer = ({ slug }: Props) => {
-  const { trailers, loading, error } = useGameTrailers(slug!);
+  const { trailers, loading, error } = useGameTrailers(slug);
   const firstTrailer = trailers[0];
 
   if (loading) return <Spinner />;
@@ -14,13 +14,15 @@ const GameTrailer = ({ slug }: Props) => {
   if (error) throw error;
 
   if (!firstTrailer) return <p>No trailer</p>;
-  
+
   return (
-    <video
-      src={firstTrailer.data[480]}
-      poster={firstTrailer.preview}
-      controls
-    />
+    <Box marginTop={8}>
+      <video
+        src={firstTrailer.data[480]}
+        poster={firstTrailer.preview}
+        controls
+      />
+    </Box>
   );
 };
 
