@@ -1,23 +1,14 @@
+import { useGameQueryStore } from "@/stores";
 import { Heading } from "@chakra-ui/react";
-import { ApiGameQuery } from "@/typing/api";
 
-interface Props {
-  query: ApiGameQuery;
-}
-
-const GameGridHeading = ({ query }: Props) => {
-  const platform =
-    query?.filters?.platforms && Array.isArray(query?.filters?.platforms)
-      ? query?.filters?.platforms[0].name
-      : "";
-  const genre =
-    query?.filters?.genres && Array.isArray(query?.filters?.genres)
-      ? query?.filters?.genres[0].name
-      : "";
-
-  const heading = `${platform} ${genre} Games`;
+const GameGridHeading = () => {
+  const { platform, genre } = useGameQueryStore((s) => ({
+    platform: s.filters.parent_platform,
+    genre: s.filters.genre,
+  }));
+  const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
   return (
-    <Heading as="h1" marginTop={10} fontSize={"5xl"}>
+    <Heading as="h1" marginTop={5} fontSize={"5xl"}>
       {heading}
     </Heading>
   );

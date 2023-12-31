@@ -2,26 +2,49 @@ import { Grid, HStack, Image, Text } from "@chakra-ui/react";
 import logo from "@assets/logo.webp";
 import ConfigApp from "@config/app";
 import { ColorModeSwitch, SearchInput } from "@/components";
+import { useGameQueryStore } from "@/stores";
+import { Link, useNavigate } from "react-router-dom";
 
-interface Props {
-  onSearch: (searchInput: string) => void;
-}
+const NavBar = () => {
+  const { onSearch } = useGameQueryStore((s) => ({
+    onSearch: s.setSearch,
+  }));
+  const navigate = useNavigate();
 
-const NavBar = ({ onSearch }: Props) => {
+  const handleSearch = (t: string) => {
+    onSearch(t);
+    navigate("/");
+  };
+
   return (
     <Grid
       templateColumns={{
         base: "1fr",
         lg: "200px 1fr",
       }}
-      paddingY={10}
+      className="window-x-space window-y-space"
     >
-      <HStack>
-        <Image src={logo} boxSize={"60px"} />
-        <Text>{ConfigApp.app_name}</Text>
+      <HStack
+        justifyContent={{
+          base: "center",
+          md: "left",
+        }}
+      >
+        <Link to="/">
+          <Image src={logo} boxSize={"50px"} />
+        </Link>
+        <Link to="/">
+          <Text fontWeight={"bold"} fontSize={"x-large"}>{ConfigApp.app_name}</Text>
+        </Link>
       </HStack>
-      <HStack justifyContent={"space-between"} paddingX={10}>
-        <SearchInput onSearch={onSearch} />
+      <HStack
+        justifyContent={"space-between"}
+        marginTop={{
+          base: 5,
+          lg: 0,
+        }}
+      >
+        <SearchInput onSearch={handleSearch} placeholder="Search Games" />
         <ColorModeSwitch />
       </HStack>
     </Grid>

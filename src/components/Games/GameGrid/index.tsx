@@ -1,21 +1,26 @@
 import { GameCard, GameCardSkeleton } from "@/components";
+import ApiConfig from "@/config/api";
+import AppConfig from "@/config/app";
 import { useGames } from "@/hooks";
-import { ApiGameQuery } from "@/typing/api";
+import { ApiGame } from "@/types/api";
 import { ArrayUtils } from "@/utils";
-import { SimpleGrid, useToast } from "@chakra-ui/react";
-import { compact as _compact } from "lodash";
+import { Box, Button, SimpleGrid, Spinner, useToast } from "@chakra-ui/react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
-  const skeletons = ArrayUtils.newRandomArray(8);
-  const { games, loading, error } = useGames({
-    filters: {
-      genres: _compact(filters?.genres ?? []),
-      platforms: _compact(filters?.platforms ?? []),
-    },
-    ordering,
-    search,
-  });
+const GameGrid = () => {
   const toast = useToast();
+  const skeletons = ArrayUtils.newRandomArray(
+    ApiConfig.resources.games.default.limit || 8
+  );
+
+  const {
+    games,
+    loading,
+    error,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useGames();
 
   if (error) {
     toast({
@@ -29,6 +34,53 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
   }
 
   return (
+    <Box marginY={10}>
+      {AppConfig.games?.infiniteScroll && (
+        <InfiniteScroll
+          dataLength={games.length}
+          hasMore={hasNextPage}
+          next={() => fetchNextPage()}
+          loader={<Spinner />}
+        >
+          <DataGrid
+            games={games}
+            loading={loading}
+            skeletons={skeletons}
+            marginBottom={10}
+          />
+        </InfiniteScroll>
+      )}
+      {!AppConfig.games?.infiniteScroll && (
+        <>
+          <DataGrid games={games} loading={loading} skeletons={skeletons} />
+          <Box marginTop={10}>
+            {!loading && hasNextPage && (
+              <Button
+                isLoading={isFetchingNextPage}
+                onClick={() => fetchNextPage()}
+              >
+                Load More {isFetchingNextPage && "..."}
+              </Button>
+            )}
+          </Box>
+        </>
+      )}
+    </Box>
+  );
+};
+
+const DataGrid = ({
+  games,
+  loading,
+  skeletons,
+  ...rest
+}: {
+  games: ApiGame[];
+  loading: boolean;
+  skeletons: number[];
+  [key: string]: unknown;
+}) => {
+  return (
     <SimpleGrid
       columns={{
         sm: 1,
@@ -36,8 +88,9 @@ const GameGrid = ({ filters, ordering, search }: ApiGameQuery) => {
         lg: 3,
         xl: 4,
       }}
-      marginTop={10}
       spacing={10}
+      {...rest}
+      overflow={"visible"}
     >
       {loading && skeletons.map((i) => <GameCardSkeleton key={i} />)}
       {!loading &&

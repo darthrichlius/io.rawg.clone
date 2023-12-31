@@ -1,10 +1,32 @@
-import axios from "axios";
-import ApiConfig from "@/config/api";
+import ApiConfig, { ApiResource } from "@/config/api";
+import axios, { AxiosRequestConfig } from "axios";
 
 const instance = axios.create({
   baseURL: ApiConfig.baseUrl,
 });
 
+const ApiService = {
+  get: <T>({
+    resource,
+    config,
+    URL,
+  }: {
+    resource: ApiResource;
+    config?: AxiosRequestConfig;
+    URL?: string;
+  }) => {
+    return instance
+      .get<T>(URL ?? ApiConfig.resources[resource].default.endpoint, config)
+      .then((res) => res.data);
+  },
+};
+
+/**
+ * ! IMPORTANT
+ * We use the interceptor approach because in PROD the key is not passed
+ * I don't know if it is a bug or a problem related to the server or whatever
+ * Following this, I used this solution until further investigation
+ */
 instance.interceptors.request.use((config) => {
   config.params = {
     ...config.params,
@@ -13,4 +35,4 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
-export default instance;
+export default ApiService;

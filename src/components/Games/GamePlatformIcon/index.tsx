@@ -1,4 +1,4 @@
-import { ApiGamePlatformIcon } from "@/typing/api";
+import { ApiGamePlatformIcon } from "@/types/api";
 import {
   FaXbox,
   FaPlaystation,

@@ -16,12 +16,21 @@ export interface ApiGamePlatformParent {
   platforms: ApiGamePlatform[];
 }
 
+export interface ApiGamePublisher {
+  id: number | null;
+  name: string;
+  slug: ApiGamePlatformIcon | null;
+  games_count: number | null;
+  image_background: string | null;
+}
+
 export interface ApiGame {
   id: number;
   slug: string;
   name: string;
   name_original: string;
   description: string;
+  description_raw: string; // not documented but exists
   metacritic: number;
   metacritic_platforms: [
     {
@@ -73,6 +82,8 @@ export interface ApiGame {
       };
     }
   ];
+  genres?: ApiGameGenre[];
+  publishers?: ApiGamePublisher[];
 }
 
 export enum ApiGamePlatformIcon {
@@ -107,7 +118,7 @@ export interface ApiGameQuery {
 
 export interface ApiGameFiltersQuery {
   genres?: ApiGameGenre[];
-  platforms?: ApiGamePlatformParent[];
+  parent_platforms?: ApiGamePlatformParent[];
 }
 
 export interface ApiGameGameSort {
@@ -136,7 +147,26 @@ export type ApiGameGameSortSlug =
 
 export interface ApiDefaultResponse<T> {
   count: number;
-  next?: string;
-  previous?: string;
+  next: string | null;
+  previous: string | null;
   results: T[];
+}
+
+export interface ApiGameTrailer {
+  id: number;
+  name: string;
+  preview?: string;
+  data: {
+    "480": string;
+    max: string;
+  };
+}
+
+export interface ApiGameScreenShoot {
+  id: number;
+  image: string;
+  hidden: boolean;
+  width: number;
+  height: number;
+  is_deleted: number;
 }

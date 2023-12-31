@@ -1,5 +1,15 @@
-const APP_CONFIG = {
+interface Props {
+  app_name: string;
+  games?: {
+    infiniteScroll: boolean;
+  };
+}
+
+const AppConfig: Props = {
   app_name: "GameHub",
+  games: {
+    infiniteScroll: true,
+  },
 };
 
-export default APP_CONFIG;
+export default AppConfig;

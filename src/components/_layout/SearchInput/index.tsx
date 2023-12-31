@@ -3,14 +3,16 @@ import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 
 interface Props {
+  placeholder: string;
   onSearch: (searchInput: string) => void;
 }
 
-const SearchInput = ({ onSearch }: Props) => {
+const SearchInput = ({ placeholder, onSearch }: Props) => {
   /**
    * We could have chose `useState`
-   * But as the logic only concerns on element, ref make more sense
-   * This is just a deceision
+   * But as the logic only concerns one element,
+   * therefore, using ref make "more sense", as it requires less code
+   * This is just a deceision, no big deal
    */
   const $ref = useRef<HTMLInputElement>(null);
 
@@ -27,7 +29,7 @@ const SearchInput = ({ onSearch }: Props) => {
         <Input
           ref={$ref}
           borderRadius={20}
-          placeholder="Search Games"
+          placeholder={placeholder}
           variant={"filters"}
           //maxWidth={"500px"}
         />

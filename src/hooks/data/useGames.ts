@@ -1,14 +1,23 @@
-import { AxiosRequestConfig } from "axios";
-import { compact as _compact } from "lodash";
 import ApiConfig from "@/config/api";
+import { ApiClient } from "@/services";
+import { useGameQueryStore } from "@/stores";
 import {
+  ApiDefaultResponse,
   ApiGame,
-  ApiGameGenre,
   ApiGameGameSort,
+  ApiGameGenre,
   ApiGamePlatformParent,
-} from "@/typing/api";
+} from "@/types/api";
+import { AxiosRequestConfig } from "axios";
+import {
+  compact as _compact,
+  flatten as _flatten,
+  isEmpty as _isEmpty,
+  map as _map,
+  some as _some,
+} from "lodash";
 import { buildDeps } from "./_utils";
-import useData from "./useData";
+import useInfiniteData from "./useInfiniteData";
 
 /**
  * ! IMPORTANT
@@ -20,10 +29,11 @@ interface Props {
   filters?: {
     // As of this version, if we have filters, we have "genres"
     genres?: ApiGameGenre[] | [];
-    platforms?: ApiGamePlatformParent[] | [];
+    parent_platforms?: ApiGamePlatformParent[] | [];
   };
   ordering?: ApiGameGameSort;
   search?: string;
+  page?: number;
 }
 
 /**
@@ -31,33 +41,59 @@ interface Props {
  * @returns {ApiGame[]} games - List of games fetched from the API.
  * @returns {string} error - Error message resulting from the API operation, if any.
  */
-const useGames = ({
-  filters = undefined,
-  ordering = undefined,
-  search = undefined,
-}: Props) => {
-  const { data: games, ...rest } = useData<ApiGame>(
-    ApiConfig.endpoints.games.getAll,
-    filters || ordering
-      ? buildParams({ filters, ordering, search })
-      : undefined,
-    filters || ordering ? buildDeps({ filters, ordering, search }) : ""
-  );
+const useGames = () => {
+  const { genre, parent_platform } = useGameQueryStore((s) => ({
+    genre: s.filters.genre,
+    parent_platform: s.filters.parent_platform,
+  }));
+  const ordering = useGameQueryStore((s) => s.ordering);
+  const search = useGameQueryStore((s) => s.search);
+  const filters = {
+    genres: genre ? [genre] : [],
+    parent_platforms: parent_platform ? [parent_platform] : [],
+  };
 
-  return { games, ...rest };
+  const { data, ...rest } = useInfiniteData<ApiDefaultResponse<ApiGame>>({
+    qKey:
+      (filters && _some(filters, (v) => !_isEmpty(v))) || ordering || search
+        ? [
+            ...ApiConfig.resources["games"].default.CACHE_KEY,
+            buildDeps({ filters, ordering, search }),
+          ]
+        : ApiConfig.resources["games"].default.CACHE_KEY,
+    qFn: ({ pageParam }) =>
+      ApiClient.get<ApiDefaultResponse<ApiGame>>({
+        resource: "games",
+        config: {
+          params: {
+            page: pageParam,
+            search,
+            page_size: ApiConfig.resources.games.default.limit || undefined,
+            ...(filters || ordering
+              ? buildFilterParams({ filters, ordering })
+              : {}),
+          },
+        },
+      }),
+  });
+
+  return {
+    games: data ? _flatten(_map(data?.pages, "results")) : [],
+    loading: rest.isLoading,
+    ...rest,
+  };
 };
 
 /**
- * Build a AxiosRequestConfig with the different filers
+ * Build a AxiosRequestConfig with the different filters
  * @param filters
  * @returns
  */
-const buildParams = (props: Props): AxiosRequestConfig => {
+const buildFilterParams = (props: Props): AxiosRequestConfig["params"] => {
   const params: {
     genres?: string;
-    platforms?: string;
+    parent_platforms?: string;
     ordering?: string;
-    search?: string;
   } = {};
 
   if (props.filters?.genres && props.filters?.genres.length) {
@@ -65,8 +101,11 @@ const buildParams = (props: Props): AxiosRequestConfig => {
       .map((genre) => genre.id)
       .join(",");
   }
-  if (props.filters?.platforms && props.filters?.platforms.length) {
-    params["platforms"] = _compact(props.filters?.platforms)
+  if (
+    props.filters?.parent_platforms &&
+    props.filters?.parent_platforms.length
+  ) {
+    params["parent_platforms"] = _compact(props.filters?.parent_platforms)
       .map((platform) => platform.id)
       .join(",");
   }
@@ -75,13 +114,7 @@ const buildParams = (props: Props): AxiosRequestConfig => {
     params["ordering"] = props.ordering.slug;
   }
 
-  if (props.search) {
-    params["search"] = props.search;
-  }
-
-  return {
-    params: params,
-  };
+  return params;
 };
 
 export default useGames;

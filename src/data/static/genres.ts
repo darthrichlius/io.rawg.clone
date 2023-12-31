@@ -1,4 +1,4 @@
-import { ApiGameGenre } from "@/typing/api";
+import { ApiGameGenre } from "@/types/api";
 
 export default [
   {

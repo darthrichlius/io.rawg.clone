@@ -1,22 +1,30 @@
-import API_CONFIG from "@/config/api";
+import ApiConfig from "@/config/api";
 import useData from "./useData";
-import { ApiGamePlatformParent } from "@/typing/api";
-import PlatformsStaticData from "@/data/static/platforms";
+import { ApiDefaultResponse, ApiGamePlatformParent } from "@/types/api";
+import PlatformsStaticData from "@/data/static/parent_platforms";
+import ApiService from "@/services/ApiClient";
+import { UseQueryOptions } from "@tanstack/react-query";
 
 const usePlatforms = () => {
-  const { data: platforms, ...rest } = useData<ApiGamePlatformParent>(
-    API_CONFIG.endpoints.platformParents.getAll,
-    undefined,
-    undefined
-  );
-  /**
-   * There is a very low probability "Platforms" data to change
-   * Therefore we can rely on static data then update them afterwards
-   * The possibility of enabling fetch anyway make the process 100% reliable and consistent with the remote data
-   */
-  const data = platforms && !rest.loading ? platforms : PlatformsStaticData;
+  const { data, ...rest } = useData<ApiDefaultResponse<ApiGamePlatformParent>>({
+    qKey: ApiConfig.resources["parent_platforms"].default.CACHE_KEY,
+    qFn: () =>
+      ApiService.get<ApiDefaultResponse<ApiGamePlatformParent>>({
+        resource: "parent_platforms",
+      }),
+    moreConfig: {
+      /**
+       * There is a very low probability "Platforms" data to change
+       * Therefore we can rely on static data then update them afterwards
+       * The possibility of enabling fetch anyway make the process 100% reliable and consistent with the remote data
+       */
+      initialData: {
+        results: PlatformsStaticData,
+      },
+    } as UseQueryOptions,
+  });
 
-  return { ...rest, platforms: data, loading: false };
+  return { ...rest, platforms: data && data.results ? data.results : [] };
 };
 
 export default usePlatforms;

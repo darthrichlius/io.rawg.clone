@@ -1,5 +1,5 @@
 import { GamePlatformIcon } from "@/components";
-import { ApiGamePlatform } from "@/typing/api";
+import { ApiGamePlatform } from "@/types/api";
 import { HStack } from "@chakra-ui/react";
 
 interface Props {

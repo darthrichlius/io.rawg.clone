@@ -15,6 +15,11 @@ This file is aimed at collecting any **IMPROVEMENTS IDEAS** or TASKS related to 
 
 ### PATCH
 
+- We should reconsider the Config for the Api and make it less complex
+  - We should have a definition for each single endpoint (`<resources>.getAll`, `<resources>.getOne`, ...)
+  - Should create a service to build URL adding the paramaters (check if exists first)
+- Make sure accessing data through an object ("filters") doesn't have caveats
+  - We talk about the fact any change to one of the object properties has an impact on all objects
 - Refactor the code to avoid passing "onSearch" throughout Component as it is a open door to deep nesting
 - We must decide it we want to keep the implementation with the individual parameters passed to GameList
   - It creates so much noise and code smell

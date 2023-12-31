@@ -9,7 +9,7 @@
  * It is like pollution. We do that only because this is for POC
  */
 
-import { ApiGamePlatformIcon } from "@/typing/api";
+import { ApiGamePlatformIcon } from "@/types/api";
 import {
   FaXbox as IconXbox,
   FaPlaystation as IconPlaystation,
