@@ -32,13 +32,12 @@ const GameTrailer = ({ slug }: Props) => {
       </Circle>
     );
 
+  const videoSrc = firstTrailer.data.max || firstTrailer.data[480];
   return (
     <Box>
-      <video
-        src={firstTrailer.data[480]}
-        poster={firstTrailer.preview}
-        controls
-      />
+      <video poster={firstTrailer.preview} src={videoSrc} controls>
+        Your browser does not support the video tag.
+      </video>
     </Box>
   );
 };

@@ -1,3 +1,9 @@
+/* Added to custom the CSS of SwiperJS */
+:root {
+    --swiper-navigation-color: #fff;
+    --swiper-pagination-color: #fff;
+}
+
 form {
     width: 100%;
 }
