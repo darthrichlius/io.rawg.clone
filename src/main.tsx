@@ -8,6 +8,7 @@ import theme from "@/theme.ts";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import routes from "./routing/routes.tsx";
+import "@/services/Logger.ts"
 
 const queryClient = new QueryClient();
 
