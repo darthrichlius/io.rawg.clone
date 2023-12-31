@@ -16,6 +16,7 @@ export { default as GameCriticScore } from "./Games/GameCriticScore";
 export { default as GameAttributes } from "./Games/GameAttributes";
 export { default as GameTrailer } from "./Games/GameTrailer";
 export { default as GameScreenShoots } from "./Games/GameScreenShoots";
+export { default as GameSelectedFilterTags } from "./Games/GameSelectedFilterTags";
 
 export { default as GamePlatformIcon } from "./Games/GamePlatformIcon";
 

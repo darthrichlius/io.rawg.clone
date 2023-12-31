@@ -26,8 +26,8 @@ interface GameQueryStore {
    *    - (B) Requiring us to guess the nature of the filter before correctly updating the store
    * - Both solutions add unnecessary complexity.
    */
-  setGenresFilter: (genre: ApiGameGenre) => void;
-  setPlatformsFilter: (platform: ApiGamePlatformParent) => void;
+  setGenresFilter: (genre: ApiGameGenre | null) => void;
+  setPlatformsFilter: (platform: ApiGamePlatformParent | null) => void;
   setOrdering: (orders: ApiGameGameSort) => void;
   setSearch: (searchQuery: string) => void;
 }
@@ -40,14 +40,14 @@ const useGameQueryStore = create<GameQueryStore>((set) => ({
     set((store) => ({
       filters: {
         ...store.filters,
-        genre,
+        genre: genre ?? undefined ,
       },
     })),
   setPlatformsFilter: (parent_platform) =>
     set((store) => ({
       filters: {
         ...store.filters,
-        parent_platform,
+        parent_platform: parent_platform ?? undefined,
       },
     })),
   setOrdering: (orders) =>

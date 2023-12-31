@@ -8,7 +8,7 @@ const GameGridHeading = () => {
   }));
   const heading = `${platform?.name || ""} ${genre?.name || ""} Games`;
   return (
-    <Heading as="h1" marginTop={10} fontSize={"5xl"}>
+    <Heading as="h1" marginTop={5} fontSize={"5xl"}>
       {heading}
     </Heading>
   );

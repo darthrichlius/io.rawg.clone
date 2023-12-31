@@ -1,10 +1,11 @@
-import { Box, HStack } from "@chakra-ui/react";
 import {
   GameGrid,
   GameGridHeading,
+  GameSelectedFilterTags,
   GameSortSelector,
   PlatformSelector,
 } from "@/components";
+import { Box, HStack } from "@chakra-ui/react";
 
 const GameListPage = () => {
   return (
@@ -13,6 +14,7 @@ const GameListPage = () => {
         <PlatformSelector />
         <GameSortSelector />
       </HStack>
+      <GameSelectedFilterTags />
       <Box>
         <GameGridHeading />
         <GameGrid />
