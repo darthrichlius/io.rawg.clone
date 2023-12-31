@@ -1,16 +1,14 @@
 import ApiConfig from "@/config/api";
 import {
-  QueryFunctionContext,
+  QueryFunction,
   QueryKey,
-  useInfiniteQuery,
+  useInfiniteQuery
 } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-type MyQueryFunction<T> = (context: QueryFunctionContext) => Promise<T>;
-
 interface Props<T> {
   qKey: QueryKey;
-  qFn: MyQueryFunction<T>;
+  qFn: QueryFunction<T, QueryKey, unknown>;
   moreConfig?: object;
 }
 
