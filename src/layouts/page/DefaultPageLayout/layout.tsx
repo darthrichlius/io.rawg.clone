@@ -6,7 +6,7 @@ const DefaulPageLayout = () => {
   return (
     <>
       <NavBar />
-      <Box paddingX={5}>
+      <Box className="window-x-space">
         <Outlet />
       </Box>
     </>

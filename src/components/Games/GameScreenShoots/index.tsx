@@ -1,5 +1,5 @@
 import { useGameScreenShoots } from "@/hooks";
-import { Box, Heading, Image, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Box, Image, SimpleGrid, Spinner } from "@chakra-ui/react";
 
 interface Props {
   slug: string;
@@ -16,7 +16,7 @@ const GameScreenShoots = ({ slug }: Props) => {
 
   return (
     <Box>
-      <Heading as="h3">Screenshots</Heading>
+      
       <SimpleGrid
         columns={{
           base: 1,

@@ -1,5 +1,6 @@
 import { useGameTrailers } from "@/hooks";
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Spinner, Circle, Text } from "@chakra-ui/react";
+import { FaHeartBroken } from "react-icons/fa";
 
 interface Props {
   slug: string;
@@ -13,10 +14,26 @@ const GameTrailer = ({ slug }: Props) => {
 
   if (error) throw error;
 
-  if (!firstTrailer) return <p>No trailer</p>;
+  if (!firstTrailer)
+    return (
+      <Circle
+        bgGradient={[
+          "linear(to-tr, teal.300, yellow.400)",
+          "linear(to-t, blue.200, teal.500)",
+          "linear(to-b, orange.100, purple.300)",
+        ]}
+        paddingY={10}
+        borderRadius={24}
+        fontWeight="bold"
+        fontSize={"xl"}
+      >
+        <Text marginRight={2}>No trailer</Text>
+        <FaHeartBroken />
+      </Circle>
+    );
 
   return (
-    <Box marginTop={8}>
+    <Box>
       <video
         src={firstTrailer.data[480]}
         poster={firstTrailer.preview}

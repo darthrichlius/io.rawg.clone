@@ -9,11 +9,11 @@ import {
 const GameListPage = () => {
   return (
     <>
-      <HStack paddingX={10} spacing={5}>
+      <HStack spacing={5}>
         <PlatformSelector />
         <GameSortSelector />
       </HStack>
-      <Box paddingX={10}>
+      <Box>
         <GameGridHeading />
         <GameGrid />
       </Box>

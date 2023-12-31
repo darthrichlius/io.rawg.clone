@@ -22,17 +22,28 @@ const NavBar = () => {
         base: "1fr",
         lg: "200px 1fr",
       }}
-      paddingY={10}
+      className="window-x-space window-y-space"
     >
-      <HStack>
+      <HStack
+        justifyContent={{
+          base: "center",
+          md: "left",
+        }}
+      >
         <Link to="/">
           <Image src={logo} boxSize={"50px"} />
         </Link>
         <Link to="/">
-          <Text>{ConfigApp.app_name}</Text>
+          <Text fontWeight={"bold"} fontSize={"x-large"}>{ConfigApp.app_name}</Text>
         </Link>
       </HStack>
-      <HStack justifyContent={"space-between"} paddingX={10}>
+      <HStack
+        justifyContent={"space-between"}
+        marginTop={{
+          base: 5,
+          lg: 0,
+        }}
+      >
         <SearchInput onSearch={handleSearch} placeholder="Search Games" />
         <ColorModeSwitch />
       </HStack>

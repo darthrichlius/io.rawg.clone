@@ -5,7 +5,7 @@ import {
   GameTrailer,
 } from "@/components";
 import { useGame } from "@/hooks";
-import { Grid, GridItem, Heading, Spinner } from "@chakra-ui/react";
+import { Container, Grid, GridItem, Heading, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 const GameDetailPage = () => {
@@ -21,27 +21,45 @@ const GameDetailPage = () => {
   if (error) throw error;
 
   return (
-    <>
+    <Container maxW='8xl'>
       {loading && <Spinner />}
       {game && (
         <Grid
           templateAreas={{
-            base: `"left" "right"`,
-            md: `"left right"`,
+            base: `
+            "game-detail-desc" 
+            "game-detail-attr" 
+            "game-detail-trailer" 
+            "game-detail-images"
+            `,
+            md: `
+            "game-detail-desc game-detail-trailer" 
+            "game-detail-attr game-detail-images"
+            `,
           }}
+          gap={8}
         >
-          <GridItem area="left">
-            <Heading>{game.name}</Heading>
+          <GridItem area="game-detail-desc">
+            <Heading as="h3" marginBottom={4}>
+              {game.name}
+            </Heading>
             <ExpandableText>{game.description_raw}</ExpandableText>
+          </GridItem>
+          <GridItem area="game-detail-attr">
             <GameAttributes game={game} />
           </GridItem>
-          <GridItem area="right">
+          <GridItem area="game-detail-trailer">
             <GameTrailer slug={game.slug} />
+          </GridItem>
+          <GridItem area="game-detail-images">
+            <Heading as="h3" marginBottom={4}>
+              Screenshots
+            </Heading>
             <GameScreenShoots slug={game.slug} />
           </GridItem>
         </Grid>
       )}
-    </>
+    </Container>
   );
 };
 
