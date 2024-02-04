@@ -1,6 +1,6 @@
-# GameHub: A Video Game Browser - Technical Experimention
+# GarceGames: A Video Game Browser - Technical Experimention
 
-This private project is intended to create a web application for browsing video games.
+This private project is a small iteration intended to create a web application for browsing video games and more.
 
 ## Project Overview
 
@@ -17,7 +17,7 @@ This private project is intended to create a web application for browsing video 
 
 ### Purpose (Why This Project and Its Significance)
 
-- The primary objective is to build a **Game Hub** platform.
+- The primary objective is to build a **Online Game Browsing** platform.
 - This platform main feature is about exploring games
 
 #### Technical Objectives

@@ -1,9 +1,10 @@
-import { Grid, HStack, Image, Text } from "@chakra-ui/react";
-import logo from "@assets/logo.webp";
+import { Grid, HStack, Icon, Text } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaGamepad as AppLogo } from "react-icons/fa6";
+
 import ConfigApp from "@config/app";
 import { ColorModeSwitch, SearchInput } from "@/components";
 import { useGameQueryStore } from "@/stores";
-import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const { onSearch } = useGameQueryStore((s) => ({
@@ -31,10 +32,12 @@ const NavBar = () => {
         }}
       >
         <Link to="/">
-          <Image src={logo} boxSize={"50px"} />
+          <Icon as={AppLogo} w={8} h={8} />
         </Link>
         <Link to="/">
-          <Text fontWeight={"bold"} fontSize={"x-large"}>{ConfigApp.app_name}</Text>
+          <Text fontWeight={"bold"} fontSize={"x-large"}>
+            {ConfigApp.app_name}
+          </Text>
         </Link>
       </HStack>
       <HStack

@@ -6,7 +6,7 @@ interface Props {
 }
 
 const AppConfig: Props = {
-  app_name: "GameHub",
+  app_name: "GarceGames",
   games: {
     infiniteScroll: true,
   },
