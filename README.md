@@ -1,38 +1,33 @@
-# GarceGames: A Video Game Browser - Technical Experimention
+# GarceGames: A Video Game Browsing Platform
 
-This private project is a small iteration intended to create a web application for browsing video games and more.
+This private and small project intended to create a web application for browsing video games and more initiatives.
 
-## Project Overview
+## PROJECT OVERVIEW
 
-### Project Context (Why Start This Project?)
+### Project Motivations
 
-- This project is part of my personal portfolio, designed to showcase a series of "Proof-Of-Skills" or "Proof-Of-Concept" projects.
+- **Portfolio**: Feed up my personal portfolio. Each project focuses on different aspects:
+  - **strengthening my core skills**
+  - **exploring new concepts or technologies**
+  - **developing reusable boilerplate templates** for future applications.
+- **Passion**: I love **video games** since my childhood. They are ludique and generate positives feelings and emotions.
 
-- Each portfolio entry is focused on **strengthening my core skills**, **exploring new concepts or technologies**, and **developing reusable boilerplate templates** for future applications.
-- Emphasizing **clean architecture** and **high-quality code** is a priority for me.
-- Engaging in P.O.C or P.O.S projects enables me to **experiment with diverse approaches** before integrating them into publicly deployable projects.
+### Project Millestones
 
-- As a senior Software Engineer and Product Manager, adaptability in handling various project types is crucial.
-- To prepare for any challenge, I continually refine my skills by encountering the hurdles that different project types can present.
+#### Short-Terms
 
-### Purpose (Why This Project and Its Significance)
+1. Build a white-label video games browsing platform
+   a. Deliver a testable and workable browsing responsive web application
+   b. Improve the user experience and secure a reliable and long-terms data sources
 
-- The primary objective is to build a **Online Game Browsing** platform.
-- This platform main feature is about exploring games
+#### Mid-Long-Terms
 
-#### Technical Objectives
+2. Build a roadmap that reflects a strategy direction over the available opportunities and user needs
 
-- I opted to select this particular project to experiment with building a complex, dynamic, and interactive web application using React without utilizing a framework like Next.js.
-  - I am used to call this type of architecures, "React-Sans"
-- This endeavor serves to deepen my understanding and awareness of working on such intricate projects.
+## PRODUCT OVERVIEW
 
-#### Project Objectives
+### Features
 
-- It's no secret that I have a profound passion for **video games**. They are ludique and are keen to generate positives feelings and emotions.
-- They significantly influenced my youth, fostering escapism and nurturing my imagination from childhood.
-- Engaging in projects within this realm offers intrinsic motivation, driving me forward.
-
-#### Product Objectives
-
-- I thrive on crafting products that potentially hold value for specific user segments.
-- Presently a POC, this project could potentially evolve into a larger-scale endeavor in the future.
+- Browsing videos games
+- Responsive, available on all screens
+- Provide valuable information and insights
