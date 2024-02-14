@@ -1,6 +1,8 @@
-import { NavBar } from "@/components";
+import { Analytics } from "@vercel/analytics/react";
 import { Box } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+
+import { NavBar } from "@/components";
 
 const DefaulPageLayout = () => {
   return (
@@ -9,6 +11,7 @@ const DefaulPageLayout = () => {
       <Box className="window-x-space">
         <Outlet />
       </Box>
+      <Analytics />
     </>
   );
 };
