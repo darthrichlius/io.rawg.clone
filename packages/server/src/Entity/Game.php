@@ -4,26 +4,28 @@ namespace App\Entity;
 
 use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource]
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 class Game
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $id;
 
-    #[ORM\Column]
-    private ?int $apiId = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private int $apiId;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private string $name;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    private string $description;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -35,7 +37,7 @@ class Game
         return $this;
     }
 
-    public function getApiId(): ?int
+    public function getApiId(): int
     {
         return $this->apiId;
     }
@@ -47,7 +49,7 @@ class Game
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -59,7 +61,7 @@ class Game
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
