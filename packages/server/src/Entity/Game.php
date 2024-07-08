@@ -5,9 +5,17 @@ namespace App\Entity;
 use App\Repository\GameRepository;
 use Doctrine\DBAL\Types\Types;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use App\Controller\ApiProxyController;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(),
+        // GetCollection is not included, effectively disabling the default collection operation
+    ]
+)]
 #[ORM\Entity(repositoryClass: GameRepository::class)]
 #[ORM\Table(name: 'games')]
 class Game
