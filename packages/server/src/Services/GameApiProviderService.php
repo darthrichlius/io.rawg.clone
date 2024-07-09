@@ -26,4 +26,15 @@ class GameApiProviderService
 
         return $response->toArray();
     }
+
+    public function listGenres(): array
+    {
+        $queryParams = [];
+        $queryParams['key'] = $this->apiKey;
+        $response = $this->httpClient->request('GET', $this->apiBaseUrl . '/genres', [
+            'query' => $queryParams,
+        ]);
+
+        return $response->toArray();
+    }
 }
