@@ -14,7 +14,7 @@ use App\Api\Action\GameSearchApiProxyAction;
     operations: [
         new Get(),
         new GetCollection(
-            uriTemplate: '/games/',
+            uriTemplate: '/games',
             controller: GameSearchApiProxyAction::class,
             name: 'app_api_proxy_search_games'
         )
