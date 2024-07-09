@@ -24,6 +24,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    
+    # Controllers as a services
+    App\Api\Action\:
+        resource: '../src/Api/Action'
+
     App\Service\GameApiProviderService:
         arguments:
             $httpClient: '@http_client'

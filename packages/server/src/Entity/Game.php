@@ -7,13 +7,17 @@ use Doctrine\DBAL\Types\Types;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
-use App\Controller\ApiProxyController;
 use Doctrine\ORM\Mapping as ORM;
+use App\Api\Action\GameSearchApiProxyAction;
 
 #[ApiResource(
     operations: [
         new Get(),
-        // GetCollection is not included, effectively disabling the default collection operation
+        new GetCollection(
+            uriTemplate: '/games/',
+            controller: GameSearchApiProxyAction::class,
+            name: 'app_api_proxy_search_games'
+        )
     ]
 )]
 #[ORM\Entity(repositoryClass: GameRepository::class)]
